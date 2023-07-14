@@ -1,22 +1,18 @@
 process ALIGN_MAFFT {
     conda file("environment.yml")
     // TODO-GP: check if docker image is available for all processes
-    container "python:3.11.4"
-    publishDir "${params.outdir}/basic_checks", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    container "staphb/mafft:7.505"
+    publishDir "${params.outdir}/align_mafft", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
-    input: 
-        path fasta_file
-        path metadata_file
-        val column
+    input:
+        path fasta from params.fasta
+        path ref_seq from params.ref_seq
     output:
-        path "output.txt"      
+        path "${params.outdir}/basic_checks/aligned.fasta"     
 
     script:
         """
-        basic_checks.py \\
-            --fasta_file ${fasta_file} \\
-            --metadata_file ${metadata_file} \\
-            --column ${column}
+        mafft --auto --thread $params.threads --addfragments $fasta $ref_seq > aligned.fasta
         """
     stub:
         """
