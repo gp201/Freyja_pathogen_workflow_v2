@@ -20,6 +20,6 @@ process ALIGN_MAFFT {
         touch aligned.fasta
         echo 'ALIGN_MAFFT'
         echo 'parameters: fasta=${fasta}, ref_seq=${ref_seq}'
-        mafft --help
-        """    
+        mafft --version
+        """
 }

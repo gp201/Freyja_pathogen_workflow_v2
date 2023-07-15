@@ -3,10 +3,13 @@
 nextflow.enable.dsl = 2
 
 include {BASIC_CHECKS   } from './modules/local/basic_checks'
+include {NEXUS_TO_NEWICK} from './modules/local/nexus_to_newick'
+
 include {ALIGN_MAFFT    } from './modules/nf-core/mafft'
 include {ALIGN_MINIMAP2 } from './modules/nf-core/minimap2'
 include {IQTREE         } from './modules/nf-core/iqtree'
 include {TREETIME       } from './modules/nf-core/treetime'
+include {FATOVCF        } from './modules/nf-core/fatovcf'
 
 workflow {
     BASIC_CHECKS(params.fasta, params.metadata, params.strain_column)
@@ -19,4 +22,11 @@ workflow {
     }
     IQTREE(align.align_fasta, params.iqtree_nucleotide_model, params.threads)
     TREETIME(align.align_fasta, IQTREE.out.tree_file, params.metadata, params.strain_column, params.date_column, params.threads)
+    NEXUS_TO_NEWICK(TREETIME.out.tree_file)
+    FATOVCF(align.align_fasta)
+}
+
+workflow.onComplete {
+    println "Workflow complete!"
+    println "Output files are stored in $params.output_dir"
 }

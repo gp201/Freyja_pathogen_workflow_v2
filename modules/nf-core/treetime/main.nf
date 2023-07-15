@@ -12,7 +12,7 @@ process TREETIME {
         val date_column
         val clock_filter
     output:
-        path "clock_results/timetree.nexus", emit: filtered_tree_file
+        path "clock_results/timetree.nexus", emit: tree_file
         path 'clock_results/*'
 
     script:
