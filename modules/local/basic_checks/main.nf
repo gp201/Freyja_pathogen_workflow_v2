@@ -1,5 +1,5 @@
 process BASIC_CHECKS {
-    conda file("environment.yml")
+    conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "python:3.11.4"
     publishDir "${params.outdir}/basic_checks", mode: params.publish_dir_mode, overwrite: params.force_overwrite
@@ -8,8 +8,6 @@ process BASIC_CHECKS {
         path fasta_file
         path metadata_file
         val column
-    output:
-        path "output.txt"      
 
     script:
         """
@@ -20,7 +18,8 @@ process BASIC_CHECKS {
         """
     stub:
         """
-        touch output.txt
-        echo "Hello World" > output.txt
+        echo 'BASIC_CHECKS'
+        echo 'parameters: \n fasta_file=${fasta_file} \n metadata_file=${metadata_file} \n column=${column}'
+        basic_checks.py --help
         """    
 }

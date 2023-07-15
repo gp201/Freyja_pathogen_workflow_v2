@@ -1,6 +1,11 @@
+#!/usr/bin/env python3
+
+"""Performs basic checks on the fasta file and metadata file."""
+
 from common import *
 
 import sys
+import argparse
 
 
 def get_fasta_headers(fasta_file):
@@ -89,9 +94,8 @@ def parser():
     Returns:
         argparse.Namespace: Object containing the command line arguments.
     """
-    import argparse
     parser = argparse.ArgumentParser(
-        description='Checks if the fasta headers are in the correct format.')
+        description='Performs basic checks on the fasta file and metadata file.')
     parser.add_argument('-f', '--fasta_file', help='Path to the fasta file.')
     parser.add_argument('-c', '--column', type=str, default='strain',
                         help='Column name of the fasta headers. Default: strain')

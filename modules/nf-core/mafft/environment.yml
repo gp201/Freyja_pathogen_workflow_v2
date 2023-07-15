@@ -1,6 +1,6 @@
-name: FreyjaBarcodePipeline
+name: mafft
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - nextflow=23.04.1
+  - mafft=7.520

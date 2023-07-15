@@ -1,6 +1,6 @@
-name: basic_checks
+name: iqtree
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - mafft=7.520
+  - iqtree=2.2.2.3

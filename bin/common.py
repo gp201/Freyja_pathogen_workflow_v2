@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
+
 """Common utility functions used by the scripts in this directory."""
 
 import pandas as pd
-import configparser
 
 
 def read_csv_tsv(file_path):

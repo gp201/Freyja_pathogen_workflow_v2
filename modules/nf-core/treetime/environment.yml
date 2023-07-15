@@ -1,6 +1,6 @@
-name: basic_checks
+name: treetime
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - python=3.11.4
+  - treetime=0.9.4
