@@ -5,6 +5,12 @@ jobs:
   stub_test:
     name: Stub test
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        profile: [conda, mamba]
+        align_method: [mafft, minimap2]
     defaults:
       run:
         shell: bash -el {0}
@@ -19,6 +25,6 @@ jobs:
         uses: nf-core/setup-nextflow@v1.2.0
         with:
           version: 23.04
-      - name: Run pipeline
+      - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
         run: |
-          nextflow -C nextflow.config run main.nf -stub-run -profile conda --align_method mafft
+          nextflow -C nextflow.config run main.nf -stub-run -profile ${{ matrix.profile }} --align_method ${{ matrix.align_method }}
