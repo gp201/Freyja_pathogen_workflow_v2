@@ -20,6 +20,10 @@ jobs:
       - name: Setup for conda
         uses: conda-incubator/setup-miniconda@v2
         with:
+          activate-environment: nexus_to_newick
+          mamba-version: "*"
+          channels: conda-forge,bioconda
+          channel-priority: true
           auto-activate-base: true
       - name: Setup nextflow
         uses: nf-core/setup-nextflow@v1.2.0
