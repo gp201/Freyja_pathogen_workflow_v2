@@ -10,6 +10,7 @@ include {ALIGN_MINIMAP2 } from './modules/nf-core/minimap2'
 include {IQTREE         } from './modules/nf-core/iqtree'
 include {TREETIME       } from './modules/nf-core/treetime'
 include {FATOVCF        } from './modules/nf-core/fatovcf'
+include {NEXSTRAIN_JSON_GENERATION} from './modules/nf-core/nextstrain_json_generation'
 
 workflow {
     BASIC_CHECKS(params.fasta, params.metadata, params.strain_column)
@@ -24,6 +25,7 @@ workflow {
     TREETIME(align.align_fasta, IQTREE.out.tree_file, params.metadata, params.strain_column, params.date_column, params.threads)
     NEXUS_TO_NEWICK(TREETIME.out.tree_file)
     FATOVCF(align.align_fasta)
+    NEXSTRAIN_JSON_GENERATION(align.align_fasta, TREETIME.out.tree_file, params.metadata, params.strain_column, params.date_column)
 }
 
 workflow.onComplete {
