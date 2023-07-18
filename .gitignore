@@ -1,4 +1,5 @@
 .nextflow*
 work
 output
-/tmp
+tmp/
+/bin/__pycache__/

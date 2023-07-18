@@ -1,6 +1,7 @@
-name: augur
+name: automated-lineage-json
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - augur=22.1.0
+  - python=3.11.4
+  - git=2.40.1

@@ -20,7 +20,7 @@ process ALIGN_MINIMAP2 {
     stub:
         """
         touch aligned.fasta
-        echo 'ALIGN_MAFFT'
+        echo 'ALIGN_MINIMAP2'
         echo 'parameters: fasta=${fasta}, ref_seq=${ref_seq}'
         minimap2 --help
         gofasta --help
