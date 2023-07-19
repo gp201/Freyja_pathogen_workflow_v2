@@ -5,7 +5,8 @@ RUN pip install pandas==2.0.3
 # setup git
 RUN apt-get update && apt-get install -y git
 
-WORKDIR /data/
+WORKDIR /data
 
-# give user access to /data
-RUN chmod -R a+rwx /data/
+RUN git clone https://github.com/jmcbroome/automated-lineage-json.git
+
+WORKDIR /data/automated-lineage-json

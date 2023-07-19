@@ -8,4 +8,4 @@ clean-docker-images:
 	bash scripts/clean_docker_images.sh
 
 test:
-	nextflow -C nextflow.config run main.nf -stub-run -profile docker --align_method mafft
+	nextflow -C nextflow.config run main.nf -stub-run -profile docker --align_method minimap2

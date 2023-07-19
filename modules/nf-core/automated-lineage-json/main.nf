@@ -13,8 +13,11 @@ process AUTOMATED_LINEAGE_JSON {
 
     script:
         """
-        git clone https://github.com/jmcbroome/automated-lineage-json.git
-        cd automated-lineage-json
+        // if workflow.profile is docker, then the git clone is not necessary
+        if [ ${workflow.profile} != 'docker' ]; then
+            git clone https://github.com/jmcbroome/automated-lineage-json.git
+            cd automated-lineage-json
+        fi
         python3 annotate_json.py --help
         """
     stub:
