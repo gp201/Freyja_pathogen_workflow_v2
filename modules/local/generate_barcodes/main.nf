@@ -11,7 +11,7 @@ process GENERATE_BARCODES {
         path 'barcode.html'
     script:
         """
-        generate_barcodes.py $clade_assignments_file
+        generate_barcodes.py $lineage_definition_file
         plot_barcode.py barcode.csv
         """
     stub:
