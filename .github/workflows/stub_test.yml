@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        profile: [conda, mamba]
-        align_method: [mafft, minimap2, docker]
+        profile: [conda, mamba, docker]
+        align_method: [mafft, minimap2]
     defaults:
       run:
         shell: bash -el {0}
@@ -34,7 +34,7 @@ jobs:
         with:
           version: 23.04
       - name: Setup docker
-        if : ${{ matrix.align_method == 'docker' }}
+        if : ${{ matrix.profile == 'docker' }}
         run: make setup-docker
         
       - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
