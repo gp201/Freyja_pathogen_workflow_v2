@@ -5,5 +5,5 @@ channels:
 dependencies:
   - python=3.11.4
   - pip:
-      - pandas==2.0.3
+      - pandas==1.5.3
       - altair==4.2.0
