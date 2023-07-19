@@ -1,7 +1,9 @@
+container_name = "${moduleDir}".split('/')[-1]
+
 process AUTOMATED_LINEAGE_JSON {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
-    container "snads/treetime:0.9.4"
+    container "${container_name}"
     publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
