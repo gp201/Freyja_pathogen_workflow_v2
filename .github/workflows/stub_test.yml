@@ -22,6 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.3.0
       - name: Setup for conda
+        if : ${{ matrix.profile == 'conda' || matrix.profile == 'mamba'}}
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: nexus_to_newick
