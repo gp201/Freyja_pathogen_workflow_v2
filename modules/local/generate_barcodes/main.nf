@@ -12,7 +12,7 @@ process GENERATE_BARCODES {
     script:
         """
         generate_barcodes.py $lineage_definition_file
-        plot_barcode.py barcode.csv
+        plot_barcode.py -i barcode.csv
         """
     stub:
         """
