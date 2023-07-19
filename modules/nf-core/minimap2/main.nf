@@ -1,4 +1,4 @@
-container_name = ${moduleDir}.split('/')[-1]
+container_name = "${moduleDir}".split('/')[-1]
 
 process ALIGN_MINIMAP2 {
     conda file("${moduleDir}/environment.yml")
