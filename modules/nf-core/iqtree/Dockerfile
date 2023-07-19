@@ -12,3 +12,5 @@ RUN tar -xzf iqtree-2.2.2.3-Linux.tar.gz
 
 # add iqtree to path
 ENV PATH="/iqtree-2.2.2.3-Linux/bin:${PATH}"
+
+WORKDIR /data/

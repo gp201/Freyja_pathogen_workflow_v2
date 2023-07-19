@@ -30,3 +30,5 @@ WORKDIR /HOME/usher
 RUN ./install/installUbuntu.sh
 
 ENV PATH=/HOME/usher/build:/HOME/kentsource:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+WORKDIR /data/

@@ -11,3 +11,5 @@ ARG MAFFT_VER=7.520
 RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates procps && apt-get autoclean
 
 RUN wget https://mafft.cbrc.jp/alignment/software/mafft_${MAFFT_VER}-1_amd64.deb && dpkg -i mafft_${MAFFT_VER}-1_amd64.deb && rm mafft_${MAFFT_VER}-1_amd64.deb
+
+WORKDIR /data/

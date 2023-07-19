@@ -1,7 +1,8 @@
+container_name = ${moduleDir}.split('/')[-1]
+
 process ALIGN_MINIMAP2 {
     conda file("${moduleDir}/environment.yml")
-    // TODO-GP: check if docker image is available for all processes
-    container "staphb/minimap2:2.24"
+    container "${container_name}"
     publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:

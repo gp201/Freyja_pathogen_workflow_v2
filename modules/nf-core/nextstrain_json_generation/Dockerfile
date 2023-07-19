@@ -10,3 +10,5 @@ RUN wget https://github.com/nextstrain/augur/releases/download/22.1.0/nextstrain
 RUN tar -xzf nextstrain-augur-22.1.0.tar.gz
 
 RUN cd nextstrain-augur-22.1.0 && python setup.py install
+
+WORKDIR /data/

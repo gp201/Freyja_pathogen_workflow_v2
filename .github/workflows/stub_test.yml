@@ -14,7 +14,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         profile: [conda, mamba]
-        align_method: [mafft, minimap2]
+        align_method: [mafft, minimap2, docker]
     defaults:
       run:
         shell: bash -el {0}
@@ -33,6 +33,10 @@ jobs:
         uses: nf-core/setup-nextflow@v1.2.0
         with:
           version: 23.04
+      - name: Setup docker
+        if : ${{ matrix.align_method == 'docker' }}
+        run: make setup-docker
+        
       - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
         run: |
           nextflow -C nextflow.config run main.nf -stub-run -profile ${{ matrix.profile }} --align_method ${{ matrix.align_method }}
