@@ -60,5 +60,5 @@ workflow {
 
 workflow.onComplete {
     println "Workflow complete!"
-    println "Output files are stored in $params.output_dir"
+    println "Output files are stored in $params.outdir/GENERATE_BARCODES"
 }
