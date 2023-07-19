@@ -2,6 +2,7 @@
 
 import pandas as pd
 import sys
+import argparse
 
 def parse_tree_paths(df):
     df = df.set_index('clade')
@@ -137,12 +138,19 @@ def check_mutation_chain(df_barcodes):
         seq_muts = identify_chains(df_barcodes)
     return df_barcodes
 
+def parser():
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('input', metavar='input', type=str,
+                        help='input file')
+    args = parser.parse_args()
+    return args
 
-fn = sys.argv[1]
-df = pd.read_csv(fn, sep='\t')
-df = parse_tree_paths(df)
-df_barcodes = convert_to_barcodes(df)
-df_barcodes = reversion_checking(df_barcodes)
-df_barcodes = check_mutation_chain(df_barcodes)
-df_barcodes.to_csv('barcode.csv')
-test_no_flip_pairs()
+def main():
+    args = parser()
+    df = pd.read_csv(args.input, sep='\t')
+    df = parse_tree_paths(df)
+    df_barcodes = convert_to_barcodes(df)
+    df_barcodes = reversion_checking(df_barcodes)
+    df_barcodes = check_mutation_chain(df_barcodes)
+    df_barcodes.to_csv('barcode.csv')
+    test_no_flip_pairs()

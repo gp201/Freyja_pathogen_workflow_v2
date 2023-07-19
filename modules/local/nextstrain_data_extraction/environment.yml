@@ -1,6 +1,9 @@
-name: augur
+name: nexus_to_newick
 channels:
   - conda-forge
   - bioconda
 dependencies:
+  - python=3.10
   - augur=22.1.0
+  - pip:
+    - biopython==1.81

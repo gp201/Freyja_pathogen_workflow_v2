@@ -7,14 +7,14 @@ process BASIC_CHECKS {
     input: 
         path fasta_file
         path metadata_file
-        val column
+        val strain_column
 
     script:
         """
         basic_checks.py \\
             --fasta_file ${fasta_file} \\
             --metadata_file ${metadata_file} \\
-            --column ${column}
+            --column ${strain_column}
         """
     stub:
         """

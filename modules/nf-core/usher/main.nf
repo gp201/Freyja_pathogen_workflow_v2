@@ -66,7 +66,8 @@ process EXTRACT_CLADES {
         """
     stub:
         """
-        touch tree.pb
+        touch lineagePaths.txt
+        touch auspice_tree.json
         echo 'EXTRACT_CLADES'
         echo 'parameters: annotated_tree=${annotated_tree}'
         matUtils --help

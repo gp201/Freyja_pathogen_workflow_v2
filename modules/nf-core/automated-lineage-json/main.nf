@@ -7,7 +7,7 @@ process AUTOMATED_LINEAGE_JSON {
     input:
         path auspice_json
     output:
-        path '*'
+        path 'auspice_lineages.json', emit: lineage_definition
 
     script:
         """
@@ -17,10 +17,11 @@ process AUTOMATED_LINEAGE_JSON {
         """
     stub:
         """
-        touch auspice.json
-        touch augur.tree
+        touch auspice_lineages.json
         echo 'AUTOMATED_LINEAGE_JSON'
         echo 'parameters: auspice_json=${auspice_json}'
-        augur --help
+        git clone https://github.com/jmcbroome/automated-lineage-json.git
+        cd automated-lineage-json
+        python3 annotate_json.py --help
         """    
 }

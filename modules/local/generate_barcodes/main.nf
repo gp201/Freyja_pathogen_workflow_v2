@@ -11,8 +11,8 @@ process GENERATE_BARCODES {
         path 'barcode.html'
     script:
         """
-        convert_barcodes.py $clade_assignments_file
-        plot_barcode.py
+        generate_barcodes.py $clade_assignments_file
+        plot_barcode.py barcode.csv
         """
     stub:
         """
