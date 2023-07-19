@@ -154,3 +154,6 @@ def main():
     df_barcodes = check_mutation_chain(df_barcodes)
     df_barcodes.to_csv('barcode.csv')
     test_no_flip_pairs()
+
+if __name__ == '__main__':
+    main()

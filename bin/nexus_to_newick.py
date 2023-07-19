@@ -31,3 +31,6 @@ def convert():
             tree = f.read()
         t = Tree(tree, format=1)
         t.write(format=0, outfile=args.output)
+
+if __name__ == '__main__':
+    convert()

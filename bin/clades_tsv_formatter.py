@@ -30,7 +30,7 @@ def switch_columns(df, col1, col2):
     """
     # reverse the order of the columns
     df = df.loc[:,[col2, col1]]
-    return df
+    return df.copy()
 
 def main():
     """Main function."""
@@ -40,7 +40,10 @@ def main():
     df = pd.read_csv(args.metadata_file, sep='\t')
 
     # switch the columns
-    df = switch_columns(df[[args.strain_col, args.lineage_col]], args.strain_col, args.lineage_col)
+    df = switch_columns(df[[args.strain_col, args.lineage_col]].copy(), args.strain_col, args.lineage_col)
 
     # write the dataframe to a tsv file
     df.to_csv(args.output_file, sep='\t', index=False, header=False)
+
+if __name__ == '__main__':
+    main()

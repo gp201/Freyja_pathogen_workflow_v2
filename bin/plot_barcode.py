@@ -37,3 +37,6 @@ def main():
     barcode = barcode.stack().reset_index()
     barcode.columns = ["Lineage", "Mutation", "z"]
     plot(barcode)
+
+if __name__ == '__main__':
+    main()
