@@ -24,28 +24,35 @@ workflow {
         NEXTSTRAIN_DATA_EXTRACTION(params.json_file, 1)
     }
     // BASIC_CHECKS(params.fasta, params.metadata, params.strain_column)
-    if (params.align_method == "mafft") {
+    if (params.skip_alignment) {
+        align = params.fasta
+    } else if (params.align_method == "mafft") {
         ALIGN_MAFFT(params.fasta, params.ref_seq, params.threads)
-        align = ALIGN_MAFFT.out
-    } else if (params.align_method == "minimap2") {
+        align = ALIGN_MAFFT.out.align_fasta
+    } else if (params.align_method == "minimap2" && params.fasta != "aligned") {
         ALIGN_MINIMAP2(params.fasta, params.ref_seq, params.threads)
-        align = ALIGN_MINIMAP2.out
+        align = ALIGN_MINIMAP2.out.align_fasta
     } else {
-        println "Invalid alignment method specified. Please choose either 'mafft' or 'minimap2'."
+        println "No alignment method specified. Please specify either 'mafft' or 'minimap2'."
         exit 1
     }
-    IQTREE(align.align_fasta, params.iqtree_nucleotide_model, params.threads)
-    TREETIME(align.align_fasta, IQTREE.out.tree_file, params.metadata, params.strain_column, params.date_column, params.threads)
-    NEXUS_TO_NEWICK(TREETIME.out.tree_file)
-    FATOVCF(align.align_fasta)
-    if (params.clade_assignment) {
-        AUTOMATED_CLADE_ASSIGNMENT(align.align_fasta, TREETIME.out.tree_file, params.metadata, params.strain_column, params.date_column)
+    if (params.tree == 'None') {
+        IQTREE(align, params.iqtree_nucleotide_model, params.threads)
+        TREETIME(align, IQTREE.out.tree_file, params.metadata, params.strain_column, params.date_column, params.threads)
+        NEXUS_TO_NEWICK(TREETIME.out.tree_file)
+        tree = NEXUS_TO_NEWICK.out.newick_tree
+    } else {
+        tree = params.tree
+    }
+    FATOVCF(align)
+    if (params.skip_clade_assignment) {
+        FORMAT_CLADES_TSV(params.metadata, params.strain_column, params.lineage_column)
+    } else {
+        AUTOMATED_CLADE_ASSIGNMENT(align, tree, params.metadata, params.strain_column, params.date_column)
         NEXTSTRAIN_DATA_EXTRACTION(AUTOMATED_CLADE_ASSIGNMENT.out.clade_assigments, 2)
         FORMAT_CLADES_TSV(NEXTSTRAIN_DATA_EXTRACTION.out.auspice_metadata, params.strain_column, params.lineage_column)
-    } else {
-        FORMAT_CLADES_TSV(params.metadata, params.strain_column, params.lineage_column)
     }
-    GENERATE_PROTOBUF_TREE(FATOVCF.out.vcf, TREETIME.out.tree_file, params.threads)
+    GENERATE_PROTOBUF_TREE(FATOVCF.out.vcf, tree, params.threads)
     ANNOTATE_TREE(GENERATE_PROTOBUF_TREE.out.protobuf_tree_file, FORMAT_CLADES_TSV.out.formatted_clades_tsv)
     EXTRACT_CLADES(ANNOTATE_TREE.out.annotated_tree_file)
     GENERATE_BARCODES(EXTRACT_CLADES.out.lineage_definition_file)
