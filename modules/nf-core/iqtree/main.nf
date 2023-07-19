@@ -2,7 +2,7 @@ process IQTREE {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "staphb/iqtree2:2.2.2.6"
-    publishDir "${params.outdir}/iqtree", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path fasta
@@ -20,7 +20,7 @@ process IQTREE {
         """
         touch ml_tree.treefile
         touch ml_tree.log
-        echo 'IQTREE'
+        echo ${task.process}
         echo 'parameters: fasta=$fasta, threads=$threads, iqtree_nucleotide_model=$iqtree_nucleotide_model'
         iqtree2 --help
         """    

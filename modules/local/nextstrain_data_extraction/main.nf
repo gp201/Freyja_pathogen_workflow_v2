@@ -2,7 +2,7 @@ process NEXTSTRAIN_DATA_EXTRACTION {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "python:3.11.4"
-    publishDir "${params.outdir}/nextstrain_data_extraction", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path json_tree
@@ -22,7 +22,7 @@ process NEXTSTRAIN_DATA_EXTRACTION {
         """
         touch auspice_metadata.tsv
         touch auspice_tree.nwk
-        echo 'NEXTSTRAIN_DATA_EXTRACTION'
+        echo ${task.process}
         echo 'parameters: json_tree=${json_tree}'
         auspice_tree_to_table.py --help
         """    

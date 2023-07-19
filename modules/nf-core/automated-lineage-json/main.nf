@@ -2,7 +2,7 @@ process AUTOMATED_LINEAGE_JSON {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "snads/treetime:0.9.4"
-    publishDir "${params.outdir}/automated-lineage-json", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path auspice_json
@@ -18,7 +18,7 @@ process AUTOMATED_LINEAGE_JSON {
     stub:
         """
         touch auspice_lineages.json
-        echo 'AUTOMATED_LINEAGE_JSON'
+        echo ${task.process}
         echo 'parameters: auspice_json=${auspice_json}'
         git clone https://github.com/jmcbroome/automated-lineage-json.git
         cd automated-lineage-json

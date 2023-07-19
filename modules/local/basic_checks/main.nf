@@ -2,7 +2,7 @@ process BASIC_CHECKS {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "python:3.11.4"
-    publishDir "${params.outdir}/basic_checks", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input: 
         path fasta_file
@@ -18,7 +18,7 @@ process BASIC_CHECKS {
         """
     stub:
         """
-        echo 'BASIC_CHECKS'
+        echo ${task.process}
         echo 'parameters: \n fasta_file=${fasta_file} \n metadata_file=${metadata_file} \n column=${column}'
         basic_checks.py --help
         """    

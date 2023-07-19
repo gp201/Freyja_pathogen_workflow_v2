@@ -2,7 +2,7 @@ process GENERATE_PROTOBUF_TREE {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "snads/treetime:0.9.4"
-    publishDir "${params.outdir}/generate_protobuf_tree", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path vcf
@@ -18,7 +18,7 @@ process GENERATE_PROTOBUF_TREE {
     stub:
         """
         touch tree.pb
-        echo 'GENERATE_PROTOBUF_TREE'
+        echo ${task.process}
         echo 'parameters: vcf=${vcf}, tree=${tree}, threads=${threads}'
         usher --help
         """
@@ -28,7 +28,7 @@ process ANNOTATE_TREE {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "snads/treetime:0.9.4"
-    publishDir "${params.outdir}/annotate_tree", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path protobuf_tree_file
@@ -43,7 +43,7 @@ process ANNOTATE_TREE {
     stub:
         """
         touch annotated_tree.pb
-        echo 'ANNOTATE_TREE'
+        echo ${task.process}
         echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}'
         matUtils --help
         """
@@ -53,7 +53,7 @@ process EXTRACT_CLADES {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "snads/treetime:0.9.4"
-    publishDir "${params.outdir}/extract_clades", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path annotated_tree
@@ -68,7 +68,7 @@ process EXTRACT_CLADES {
         """
         touch lineagePaths.txt
         touch auspice_tree.json
-        echo 'EXTRACT_CLADES'
+        echo ${task.process}
         echo 'parameters: annotated_tree=${annotated_tree}'
         matUtils --help
         """

@@ -2,7 +2,7 @@ process TREETIME {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "snads/treetime:0.9.4"
-    publishDir "${params.outdir}/treetime", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path fasta
@@ -25,7 +25,7 @@ process TREETIME {
         cd clock_results
         touch timetree.nexus
         touch timetree.log
-        echo 'TREETIME'
+        echo ${task.process}
         echo 'parameters: fasta=${fasta}, tree=${tree}, metadata_file=${metadata_file}, strain_column=${strain_column}, date_column=${date_column}, clock_filter=${clock_filter}'
         treetime --help
         """    

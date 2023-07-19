@@ -2,7 +2,7 @@ process FORMAT_CLADES_TSV {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
     container "python:3.11.4"
-    publishDir "${params.outdir}/basic_checks", mode: params.publish_dir_mode, overwrite: params.force_overwrite
+    publishDir "${params.outdir}/${task.process}", mode: params.publish_dir_mode, overwrite: params.force_overwrite
 
     input:
         path metadata_file
@@ -18,7 +18,7 @@ process FORMAT_CLADES_TSV {
     stub:
         """
         touch formatted_clades.tsv
-        echo 'FORMAT_CLADES_TSV'
+        echo ${task.process}
         echo 'parameters: metadata_file=${metadata_file}, strain_column=${strain_column}, lineage_column=${lineage_column}'
         clades_tsv_formatter.py --help
         """    
