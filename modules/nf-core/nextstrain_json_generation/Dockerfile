@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10.12-bullseye
 
 RUN pip install biopython==1.81
 
