@@ -54,7 +54,7 @@ jobs:
               # build the docker image
               docker buildx build -t $DOCKER_IMAGE_NAME -f $DOCKER_FILE \
                 --cache-to type=gha[mode=min] \
-                --cache-from type=gha[mode=min] .
+                --cache-from type=gha[mode=min] $DOCKER_FILE_DIR
           done
 
         
