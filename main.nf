@@ -4,6 +4,9 @@ nextflow.enable.dsl = 2
 
 include {BASIC_CHECKS   } from './modules/local/basic_checks'
 include {NEXUS_TO_NEWICK} from './modules/local/nexus_to_newick'
+include {GENERATE_BARCODES} from './modules/local/generate_barcodes'
+include {FORMAT_CLADES_TSV} from './modules/local/clades_tsv_formatter'
+include {NEXTSTRAIN_DATA_EXTRACTION} from './modules/local/nextstrain_data_extraction'
 
 include {ALIGN_MAFFT    } from './modules/nf-core/mafft'
 include {ALIGN_MINIMAP2 } from './modules/nf-core/minimap2'
@@ -15,9 +18,6 @@ include {AUTOMATED_CLADE_ASSIGNMENT} from './subworkflows/nf-core/autolin_genera
 include {GENERATE_PROTOBUF_TREE} from './modules/nf-core/usher'
 include {ANNOTATE_TREE} from './modules/nf-core/usher'
 include {EXTRACT_CLADES} from './modules/nf-core/usher'
-include {GENERATE_BARCODES} from './modules/local/generate_barcodes'
-include {FORMAT_CLADES_TSV} from './modules/local/clades_tsv_formatter'
-include {NEXTSTRAIN_DATA_EXTRACTION} from './modules/local/nextstrain_data_extraction'
 
 workflow {
     if (params.use_json) {
