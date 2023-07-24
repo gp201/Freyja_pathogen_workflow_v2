@@ -10,7 +10,7 @@ process AUTOMATED_LINEAGE_JSON {
         path auspice_json
     output:
         path 'auspice_lineages.json', emit: lineage_definition
-        path *
+        path '*'
 
     script:
         """
@@ -19,7 +19,7 @@ process AUTOMATED_LINEAGE_JSON {
             git clone https://github.com/jmcbroome/automated-lineage-json.git
             cd automated-lineage-json
         fi
-        python3 annotate_json.py -i $auspice_json -o auspice_lineages.json -r lineage_report.tsv -a sample_lineage_associations.tsv
+        python3 annotate_json.py -i $auspice_json -o auspice_lineages.json -r lineage_report.tsv -a sample_lineage_associations.tsv $params.autolin_cmd
         """
     stub:
         """
