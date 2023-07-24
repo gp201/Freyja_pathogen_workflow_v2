@@ -26,7 +26,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: nexus_to_newick
-          mamba-version: "1.4.2"
+          mamba-version: "*"
           channels: conda-forge,bioconda
           channel-priority: true
           auto-activate-base: true
