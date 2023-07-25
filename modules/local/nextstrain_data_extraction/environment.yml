@@ -1,4 +1,4 @@
-name: nexus_to_newick
+name: nextstrain_data_extraction
 channels:
   - conda-forge
   - bioconda

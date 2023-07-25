@@ -1,4 +1,4 @@
-name: basic_checks
+name: generate_barcodes
 channels:
   - conda-forge
   - bioconda
