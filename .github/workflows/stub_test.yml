@@ -25,7 +25,6 @@ jobs:
         if : ${{ matrix.profile == 'conda' || matrix.profile == 'mamba'}}
         uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: base
           mamba-version: "*"
           channels: conda-forge,bioconda
           channel-priority: true
