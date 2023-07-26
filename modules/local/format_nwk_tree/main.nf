@@ -9,17 +9,17 @@ process FORMAT_NWK_TREE {
     input:
         path nwk_tree
     output:
-        path "timetree.newick", emit: newick_tree
+        path "tree.nwk", emit: newick_tree
 
     script:
         """
-        format_tree.py -i $nwk_tree -f 'newick' -o timetree.newick -r
+        format_tree.py -i $nwk_tree -f 'newick' -o tree.nwk -r
         """
     stub:
         """
-        touch timetree.newick
+        touch tree.nwk
         echo ${task.process}
-        echo 'parameters: \n nexus_tree: ${nexus_tree}'
+        echo 'parameters: \n nwk_tree: ${nwk_tree}'
         format_tree.py --help
         """    
 }
