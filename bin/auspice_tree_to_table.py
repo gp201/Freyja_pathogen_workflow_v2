@@ -138,6 +138,14 @@ if __name__ == "__main__":
 
         if args.attributes:
             attributes = args.attributes
+        elif not args.include_internal_nodes:
+            # get attributes from the first terminal node
+            tmp_tree = tree
+            node = list(tmp_tree.find_clades(terminal=True))[0]
+            attributes = sorted(
+                set(node.node_attrs.keys()) |
+                set(node.branch_attrs.keys())
+            )
         else:
             attributes = sorted(
                 set(tree.root.node_attrs.keys()) |
