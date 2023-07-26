@@ -17,5 +17,5 @@ workflow NEXTSTRAIN_DATA_EXTRACTION_WORKFLOW {
 
 // Implicit workflow
 workflow  {
-  NEXTSTRAIN_DATA_EXTRACTION_WORKFLOW(params.json_tree, 'test')
+  NEXTSTRAIN_DATA_EXTRACTION_WORKFLOW(params.json_tree, 'subworkflow')
 }
