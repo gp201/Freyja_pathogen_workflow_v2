@@ -7,14 +7,13 @@ from augur.utils import annotate_parents_for_tree
 import Bio.Phylo
 import json
 import pandas as pd
-import warnings
 
 node_names = {}
 
 def handle_duplicate_names(name):
     if name in node_names.keys():
         node_names[name] += 1
-        warnings.warn(f"Duplicate node name '{name}' found. Renaming to '{name}_{node_names[name]}'")
+        print(f"Duplicate node name '{name}' found. Renaming to '{name}_{node_names[name]}'")
         name = f"{name}_{node_names[name]}"
     else:
         node_names[name] = 0

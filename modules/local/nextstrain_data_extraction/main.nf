@@ -11,7 +11,7 @@ process NEXTSTRAIN_DATA_EXTRACTION {
         val prefix
     output:
         path "${prefix}_auspice_metadata.tsv", emit: auspice_metadata
-        path "${prefix}auspice_tree.nwk", emit: auspice_tree
+        path "${prefix}_auspice_tree.nwk", emit: auspice_tree
 
     script:
         """
