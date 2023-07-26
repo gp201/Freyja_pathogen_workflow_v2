@@ -14,6 +14,7 @@ def parser():
     """
     parser = argparse.ArgumentParser(description='Convert a nexus file to newick format')
     parser.add_argument("-i", "--input", help="Nexus file", required=True)
+    parser.add_argument("-f", "--format", help="Format of the nexus file", choices=["nexus", "newick"], default="nexus")
     parser.add_argument("-r", "--reformat", help="Reformat using ete3", action="store_true")
     parser.add_argument("-o", "--output", help="Newick file", required=True)
     args = parser.parse_args()
@@ -23,7 +24,7 @@ def convert():
     """Converts a nexus file to a newick file."""
     args = parser()
 
-    tree = dendropy.Tree.get_from_path(args.input, "nexus")
+    tree = dendropy.Tree.get_from_path(args.input, args.format, suppress_leaf_node_taxa=False, suppress_internal_node_taxa=True, case_sensitive_taxon_labels=True, preserve_underscores=True)
     tree.write_to_path(args.output, "newick")
 
     if args.reformat:

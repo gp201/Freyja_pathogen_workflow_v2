@@ -7,7 +7,18 @@ from augur.utils import annotate_parents_for_tree
 import Bio.Phylo
 import json
 import pandas as pd
-import sys
+import warnings
+
+node_names = {}
+
+def handle_duplicate_names(name):
+    if name in node_names.keys():
+        node_names[name] += 1
+        warnings.warn(f"Duplicate node name '{name}' found. Renaming to '{name}_{node_names[name]}'")
+        name = f"{name}_{node_names[name]}"
+    else:
+        node_names[name] = 0
+    return name
 
 
 def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
@@ -68,13 +79,13 @@ def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
 
     # v1 and v2 JSONs use different keys for strain names.
     if "name" in json_dict:
-        node.name = json_dict["name"]
+        node.name = handle_duplicate_names(json_dict["name"])
     else:
-        node.name = json_dict["strain"]
+        node.name = handle_duplicate_names(json_dict["strain"])
 
     # Assign all non-children attributes.
     for attr, value in json_dict.items():
-        if attr != "children":
+        if attr != "children" and attr != "name" and attr != "strain":
             setattr(node, attr, value)
 
     # Only v1 JSONs support a single `attr` attribute.
@@ -164,7 +175,7 @@ if __name__ == "__main__":
                     elif attribute in node.branch_attrs:
                         value = node.branch_attrs[attribute]
                     else:
-                        print(f"Could not find attribute '{attribute}' for node '{node.name}'.", file=sys.stderr)
+                        print(f"Could not find attribute '{attribute}' for node '{node.name}'.")
                         value = None
 
                     if value is not None:

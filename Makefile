@@ -1,5 +1,9 @@
 clean:
-	bash ./scripts/clean_up.sh
+ifdef docker
+	@bash ./scripts/clean_up.sh -d
+else
+	@bash ./scripts/clean_up.sh
+endif
 
 setup-docker:
 	bash scripts/setup_docker_images.sh

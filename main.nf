@@ -14,15 +14,16 @@ include {IQTREE         } from './modules/nf-core/iqtree'
 include {TREETIME       } from './modules/nf-core/treetime'
 include {FATOVCF        } from './modules/nf-core/fatovcf'
 include {NEXSTRAIN_JSON_GENERATION} from './modules/nf-core/nextstrain_json_generation'
-include {AUTOMATED_CLADE_ASSIGNMENT} from './subworkflows/nf-core/autolin_generate_clades'
 include {GENERATE_PROTOBUF_TREE} from './modules/nf-core/usher'
 include {ANNOTATE_TREE} from './modules/nf-core/usher'
 include {EXTRACT_CLADES} from './modules/nf-core/usher'
 
+include {AUTOMATED_CLADE_ASSIGNMENT} from './subworkflows/nf-core/autolin_generate_clades'
+
 workflow {
-    if (params.use_json) {
-        NEXTSTRAIN_DATA_EXTRACTION(params.json_file, 1)
-    }
+    // if (params.use_json) {
+    //     NEXTSTRAIN_DATA_EXTRACTION(params.json_file, 1)
+    // }
     // BASIC_CHECKS(params.fasta, params.metadata, params.strain_column)
     if (params.skip_alignment) {
         align = params.fasta

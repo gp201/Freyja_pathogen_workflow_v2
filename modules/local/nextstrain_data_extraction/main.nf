@@ -10,12 +10,12 @@ process NEXTSTRAIN_DATA_EXTRACTION {
         path json_tree
         val prefix
     output:
-        path "auspice_metadata.tsv", emit: auspice_metadata
-        path "auspice_tree.nwk", emit: auspice_tree
+        path "${prefix}_auspice_metadata.tsv", emit: auspice_metadata
+        path "${prefix}auspice_tree.nwk", emit: auspice_tree
 
     script:
         """
-        python3 auspice_tree_to_table.py \
+        auspice_tree_to_table.py \
             --tree $json_tree \
             --output-metadata ${prefix}_auspice_metadata.tsv \
             --output-tree ${prefix}auspice_tree.nwk

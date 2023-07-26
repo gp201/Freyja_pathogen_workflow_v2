@@ -1,4 +1,4 @@
-name: nexus_to_newick
+name: format_nwk_tree
 channels:
   - conda-forge
   - bioconda
