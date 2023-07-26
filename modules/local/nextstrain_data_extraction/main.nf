@@ -18,7 +18,7 @@ process NEXTSTRAIN_DATA_EXTRACTION {
         auspice_tree_to_table.py \
             --tree $json_tree \
             --output-metadata ${prefix}_auspice_metadata.tsv \
-            --output-tree ${prefix}auspice_tree.nwk
+            --output-tree ${prefix}_auspice_tree.nwk
         """
     stub:
         """
