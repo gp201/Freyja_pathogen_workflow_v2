@@ -30,7 +30,7 @@ workflow {
     } else if (params.align_method == "mafft") {
         ALIGN_MAFFT(params.fasta, params.ref_seq, params.threads)
         align = ALIGN_MAFFT.out.align_fasta
-    } else if (params.align_method == "minimap2" && params.fasta != "aligned") {
+    } else if (params.align_method == "minimap2") {
         ALIGN_MINIMAP2(params.fasta, params.ref_seq, params.threads)
         align = ALIGN_MINIMAP2.out.align_fasta
     } else {
