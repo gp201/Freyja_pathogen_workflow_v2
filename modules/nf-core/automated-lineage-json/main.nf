@@ -16,7 +16,7 @@ process AUTOMATED_LINEAGE_JSON {
         """
         // if workflow.profile is docker, then the git clone is not necessary
         if [ ${workflow.profile} != 'docker' ]; then
-            git clone https://github.com/jmcbroome/automated-lineage-json.git
+            git clone "https://github.com/jmcbroome/automated-lineage-json.git"
         fi
         python3 automated-lineage-json/annotate_json.py -i $auspice_json -o auspice_lineages.json -r lineage_report.tsv -a sample_lineage_associations.tsv $params.autolin_cmd
         """
@@ -25,7 +25,7 @@ process AUTOMATED_LINEAGE_JSON {
         touch auspice_lineages.json
         echo ${task.process}
         echo 'parameters: auspice_json=${auspice_json}'
-        git clone https://github.com/jmcbroome/automated-lineage-json.git
+        git clone "https://github.com/jmcbroome/automated-lineage-json.git"
         python3 automated-lineage-json/annotate_json.py --help
         """    
 }
