@@ -19,7 +19,7 @@ process TREETIME {
 
     script:
         """
-        treetime --aln $aligned_fasta --tree $tree --dates $metadata_file --name-column $strain_column --date-column $date_column --clock-filter $clock_filter --outdir clock_results
+        treetime --aln $aligned_fasta --tree $tree --dates $metadata_file --name-column "$strain_column" --date-column "$date_column" --clock-filter $clock_filter --outdir clock_results
         """
     stub:
         """

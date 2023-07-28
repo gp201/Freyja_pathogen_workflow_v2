@@ -15,7 +15,7 @@ process FORMAT_CLADES_TSV {
 
     script:
         """
-        clades_tsv_formatter.py -m ${metadata_file} -s ${strain_column} -l ${lineage_column} -o formatted_clades.tsv
+        clades_tsv_formatter.py -m ${metadata_file} -s "${strain_column}" -l "${lineage_column}" -o formatted_clades.tsv
         """
     stub:
         """

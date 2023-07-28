@@ -16,7 +16,7 @@ process BASIC_CHECKS {
         basic_checks.py \\
             --fasta_file ${fasta_file} \\
             --metadata_file ${metadata_file} \\
-            --column ${strain_column}
+            --column "${strain_column}"
         """
     stub:
         """

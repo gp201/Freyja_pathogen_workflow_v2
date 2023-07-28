@@ -13,7 +13,6 @@ include {ALIGN_MINIMAP2 } from './modules/nf-core/minimap2'
 include {IQTREE         } from './modules/nf-core/iqtree'
 include {TREETIME       } from './modules/nf-core/treetime'
 include {FATOVCF        } from './modules/nf-core/fatovcf'
-include {NEXSTRAIN_JSON_GENERATION} from './modules/nf-core/nextstrain_json_generation'
 include {GENERATE_PROTOBUF_TREE} from './modules/nf-core/usher'
 include {ANNOTATE_TREE} from './modules/nf-core/usher'
 include {EXTRACT_CLADES} from './modules/nf-core/usher'
@@ -49,7 +48,7 @@ workflow {
     if (params.skip_clade_assignment) {
         FORMAT_CLADES_TSV(params.metadata, params.strain_column, params.lineage_column)
     } else {
-        AUTOMATED_CLADE_ASSIGNMENT(align, tree, params.metadata, params.strain_column, params.date_column)
+        AUTOMATED_CLADE_ASSIGNMENT(align, tree, params.metadata)
         NEXTSTRAIN_DATA_EXTRACTION(AUTOMATED_CLADE_ASSIGNMENT.out.clade_assigments, 2)
         FORMAT_CLADES_TSV(NEXTSTRAIN_DATA_EXTRACTION.out.auspice_metadata, params.strain_column, params.lineage_column)
     }

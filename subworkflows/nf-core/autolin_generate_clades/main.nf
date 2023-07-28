@@ -6,10 +6,8 @@ workflow AUTOMATED_CLADE_ASSIGNMENT {
         fasta
         tree
         metadata_file
-        strain_column
-        date_column
     main:
-        NEXSTRAIN_JSON_GENERATION(fasta, tree, metadata_file, strain_column, date_column)
+        NEXSTRAIN_JSON_GENERATION(fasta, tree, metadata_file)
         AUTOMATED_LINEAGE_JSON(NEXSTRAIN_JSON_GENERATION.out.nextstrain_json)
     emit:
         clade_assigments = AUTOMATED_LINEAGE_JSON.out.lineage_definition

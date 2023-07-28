@@ -10,8 +10,6 @@ process NEXSTRAIN_JSON_GENERATION {
         path fasta
         path tree
         path metadata_file
-        val strain_column
-        val date_column
     output:
         path "auspice.json", emit: nextstrain_json
         path '*'
@@ -27,7 +25,7 @@ process NEXSTRAIN_JSON_GENERATION {
         touch auspice.json
         touch augur.tree
         echo ${task.process}
-        echo 'parameters: fasta=${fasta}, tree=${tree}, metadata_file=${metadata_file}, strain_column=${strain_column}, date_column=${date_column}'
+        echo 'parameters: fasta=${fasta}, tree=${tree}, metadata_file=${metadata_file}'
         augur --help
         """    
 }
