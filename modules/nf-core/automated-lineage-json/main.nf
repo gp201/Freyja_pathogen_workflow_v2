@@ -18,7 +18,7 @@ process AUTOMATED_LINEAGE_JSON {
         if [ ${workflow.profile} != 'docker' ]; then
             wget "https://raw.githubusercontent.com/jmcbroome/automated-lineage-json/main/annotate_json.py"
         fi
-        python3 automated-lineage-json/annotate_json.py -i $auspice_json -o auspice_lineages.json -r lineage_report.tsv -a sample_lineage_associations.tsv $params.autolin_cmd
+        python3 annotate_json.py -i $auspice_json -o auspice_lineages.json -r lineage_report.tsv -a sample_lineage_associations.tsv $params.autolin_cmd
         """
     stub:
         """
