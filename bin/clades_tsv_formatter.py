@@ -4,6 +4,7 @@
 
 import argparse
 import pandas as pd
+from common import *
 
 def parser():
     """Parse command line arguments.
@@ -37,7 +38,7 @@ def main():
     args = parser()
 
     # read in the metadata file
-    df = pd.read_csv(args.metadata_file, sep='\t')
+    df = read_csv_tsv(args.metadata_file)
 
     # switch the columns
     df = switch_columns(df[[args.strain_col, args.lineage_col]].copy(), args.strain_col, args.lineage_col)

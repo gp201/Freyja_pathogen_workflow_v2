@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import pandas as pd
-import sys
 import argparse
 
 def parse_tree_paths(df):
