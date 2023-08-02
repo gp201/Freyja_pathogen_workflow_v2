@@ -40,7 +40,7 @@ process ANNOTATE_TREE {
 
     script:
         """
-        matUtils annotate -i $protobuf_tree_file -c $clades -o annotated_tree.pb
+        matUtils annotate -i $protobuf_tree_file -c $clades -o annotated_tree.pb --set-overlap $params.matUtils_overlap
         """
     stub:
         """
@@ -64,7 +64,7 @@ process EXTRACT_CLADES {
         path 'auspice_tree.json'
     script:
         """
-        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json --set-overlap $params.matUtils_overlap
+        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json
         """
     stub:
         """
