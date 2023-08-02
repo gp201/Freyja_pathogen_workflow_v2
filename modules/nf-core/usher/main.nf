@@ -64,7 +64,7 @@ process EXTRACT_CLADES {
         path 'auspice_tree.json'
     script:
         """
-        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json
+        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json --set-overlap $params.matUtils_overlap
         """
     stub:
         """
