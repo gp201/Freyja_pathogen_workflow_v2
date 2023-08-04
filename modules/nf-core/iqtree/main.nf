@@ -16,7 +16,7 @@ process IQTREE {
 
     script:
         """
-        iqtree2 -s $fasta -T $threads -m $iqtree_nucleotide_model --prefix ml_tree
+        iqtree2 -s $fasta -T AUTO -m $iqtree_nucleotide_model --prefix ml_tree
         """
     stub:
         """

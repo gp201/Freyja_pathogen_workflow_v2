@@ -11,7 +11,7 @@ def parser():
 
     Returns:
         argparse.Namespace: Object containing the command line arguments.
-    """
+    """  
     parser = argparse.ArgumentParser(description='Extract lineage and strain columns from metadata file')
     parser.add_argument("-m", "--metadata_file", help="Metadata file", required=True)
     parser.add_argument("-s", "--strain_col", help="Strain column name", default='strain')
