@@ -50,7 +50,7 @@ workflow {
     } else {
         AUTOMATED_CLADE_ASSIGNMENT(align, tree, params.metadata)
         NEXTSTRAIN_DATA_EXTRACTION(AUTOMATED_CLADE_ASSIGNMENT.out.clade_assigments, 2)
-        FORMAT_CLADES_TSV(NEXTSTRAIN_DATA_EXTRACTION.out.auspice_metadata, params.strain_column, params.lineage_column)
+        FORMAT_CLADES_TSV(NEXTSTRAIN_DATA_EXTRACTION.out.auspice_metadata, 'name', params.lineage_column)
     }
     GENERATE_PROTOBUF_TREE(FATOVCF.out.vcf, tree, params.threads)
     ANNOTATE_TREE(GENERATE_PROTOBUF_TREE.out.protobuf_tree_file, FORMAT_CLADES_TSV.out.formatted_clades_tsv)
