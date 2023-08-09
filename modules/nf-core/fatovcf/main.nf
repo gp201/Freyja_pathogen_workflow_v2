@@ -10,6 +10,7 @@ process FATOVCF {
         path fasta
     output:
         path "aligned.vcf", emit: vcf
+        path '*'
 
     script:
         """
@@ -18,8 +19,8 @@ process FATOVCF {
     stub:
         """
         touch aligned.vcf
-        echo ${task.process}
-        echo 'parameters: fasta=${fasta}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: fasta=${fasta}' >> ${task.process}.txt
         faToVcf --help
         """    
 }

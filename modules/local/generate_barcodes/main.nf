@@ -9,8 +9,8 @@ process GENERATE_BARCODES {
     input: 
         path lineage_definition_file
     output:
-        path 'barcode.csv'
-        path 'barcode.html'
+        path '*'
+
     script:
         """
         generate_barcodes.py $lineage_definition_file
@@ -20,8 +20,8 @@ process GENERATE_BARCODES {
         """
         touch barcode.csv
         touch barcode.html
-        echo ${task.process}
-        echo 'parameters: lineage_definition_file=${lineage_definition_file}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: lineage_definition_file=${lineage_definition_file}' >> ${task.process}.txt
         generate_barcodes.py --help
         plot_barcode.py --help
         """    

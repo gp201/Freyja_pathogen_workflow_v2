@@ -12,6 +12,7 @@ process FORMAT_CLADES_TSV {
         val lineage_column
     output:
         path "formatted_clades.tsv", emit: formatted_clades_tsv
+        path '*'
 
     script:
         """
@@ -20,8 +21,8 @@ process FORMAT_CLADES_TSV {
     stub:
         """
         touch formatted_clades.tsv
-        echo ${task.process}
-        echo 'parameters: metadata_file=${metadata_file}, strain_column=${strain_column}, lineage_column=${lineage_column}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: metadata_file=${metadata_file}, strain_column=${strain_column}, lineage_column=${lineage_column}' >> ${task.process}.txt
         clades_tsv_formatter.py --help
         """    
 }

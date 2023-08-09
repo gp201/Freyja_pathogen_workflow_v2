@@ -27,8 +27,7 @@ process TREETIME {
         cd clock_results
         touch timetree.nexus
         touch timetree.log
-        echo ${task.process}
-        echo 'parameters: fasta=${fasta}, tree=${tree}, metadata_file=${metadata_file}, strain_column=${strain_column}, date_column=${date_column}, clock_filter=${clock_filter}'
-        treetime --help
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: fasta=${aligned_fasta}, tree=${tree}, metadata_file=${metadata_file}, strain_column=${strain_column}, date_column=${date_column}, clock_filter=${clock_filter}' >> ${task.process}.txt
         """    
 }

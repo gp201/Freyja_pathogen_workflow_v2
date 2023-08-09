@@ -24,8 +24,8 @@ process NEXTSTRAIN_DATA_EXTRACTION {
         """
         touch ${prefix}_auspice_metadata.tsv
         touch ${prefix}_auspice_tree.nwk
-        echo ${task.process}
-        echo 'parameters: json_tree=${json_tree}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: json_tree=${json_tree}' >> ${task.process}.txt
         auspice_tree_to_table.py --help
         """    
 }

@@ -22,8 +22,8 @@ process AUTOMATED_LINEAGE_JSON {
     stub:
         """
         touch auspice_lineages.json
-        echo ${task.process}
-        echo 'parameters: auspice_json=${auspice_json}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: auspice_json=${auspice_json}' >> ${task.process}.txt
         git clone https://github.com/jmcbroome/automated-lineage-json.git
         python3 automated-lineage-json/annotate_json.py --help
         """    

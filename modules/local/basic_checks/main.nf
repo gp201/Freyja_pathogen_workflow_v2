@@ -20,8 +20,8 @@ process BASIC_CHECKS {
         """
     stub:
         """
-        echo ${task.process}
-        echo 'parameters: \n fasta_file=${fasta_file} \n metadata_file=${metadata_file} \n column=${column}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: \n fasta_file=${fasta_file} \n metadata_file=${metadata_file} \n column=${column}' >> ${task.process}.txt
         basic_checks.py --help
         """    
 }

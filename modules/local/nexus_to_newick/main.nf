@@ -10,6 +10,7 @@ process NEXUS_TO_NEWICK {
         path nexus_tree
     output:
         path "timetree.newick", emit: newick_tree
+        path '*'
 
     script:
         """
@@ -18,8 +19,8 @@ process NEXUS_TO_NEWICK {
     stub:
         """
         touch timetree.newick
-        echo ${task.process}
-        echo 'parameters: \n nexus_tree: ${nexus_tree}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: \n nexus_tree: ${nexus_tree}' >> ${task.process}.txt
         format_tree.py --help
         """    
 }

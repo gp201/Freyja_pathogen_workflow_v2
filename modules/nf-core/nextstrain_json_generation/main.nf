@@ -24,8 +24,8 @@ process NEXSTRAIN_JSON_GENERATION {
         """
         touch auspice.json
         touch augur.tree
-        echo ${task.process}
-        echo 'parameters: fasta=${fasta}, tree=${tree}, metadata_file=${metadata_file}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: fasta=${fasta}, tree=${tree}, metadata_file=${metadata_file}' >> ${task.process}.txt
         augur --help
-        """    
+        """
 }

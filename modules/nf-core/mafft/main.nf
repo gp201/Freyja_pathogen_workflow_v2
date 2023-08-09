@@ -12,7 +12,7 @@ process ALIGN_MAFFT {
         val threads
     output:
         path "aligned.fasta", emit: align_fasta
-        path "output.txt"
+        path '*'
 
     script:
         """
@@ -21,9 +21,8 @@ process ALIGN_MAFFT {
     stub:
         """
         touch aligned.fasta
-        echo ${moduleDir} >> output.txt
-        echo ${task.process} >> output.txt
-        echo 'parameters: fasta=${fasta}, ref_seq=${ref_seq}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: fasta=${fasta}, ref_seq=${ref_seq}' >> ${task.process}.txt
         mafft --version
         """
 }

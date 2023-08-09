@@ -10,6 +10,7 @@ process FORMAT_NWK_TREE {
         path nwk_tree
     output:
         path "tree.nwk", emit: newick_tree
+        path '*'
 
     script:
         """
@@ -18,8 +19,8 @@ process FORMAT_NWK_TREE {
     stub:
         """
         touch tree.nwk
-        echo ${task.process}
-        echo 'parameters: \n nwk_tree: ${nwk_tree}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: \n nwk_tree: ${nwk_tree}' >> ${task.process}.txt
         format_tree.py --help
         """    
 }

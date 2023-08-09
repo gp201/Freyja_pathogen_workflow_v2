@@ -12,6 +12,7 @@ process GENERATE_PROTOBUF_TREE {
         val threads
     output:
         path 'tree.pb', emit: protobuf_tree_file
+        path '*'
 
     script:
         """
@@ -20,8 +21,8 @@ process GENERATE_PROTOBUF_TREE {
     stub:
         """
         touch tree.pb
-        echo ${task.process}
-        echo 'parameters: vcf=${vcf}, tree=${tree}, threads=${threads}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: vcf=${vcf}, tree=${tree}, threads=${threads}' >> ${task.process}.txt
         usher --help
         """
 }
@@ -37,6 +38,7 @@ process ANNOTATE_TREE {
         path clades
     output:
         path 'annotated_tree.pb', emit: annotated_tree_file
+        path '*'
 
     script:
         """
@@ -45,8 +47,8 @@ process ANNOTATE_TREE {
     stub:
         """
         touch annotated_tree.pb
-        echo ${task.process}
-        echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}' >> ${task.process}.txt
         matUtils --help
         """
 }
@@ -62,18 +64,20 @@ process EXTRACT_CLADES {
         path reference
     output:
         path 'lineagePaths.txt', emit: lineage_definition_file
-        path 'auspice_tree.json'
+        path '*'
+
     script:
         """
-        reference_name=$(head -n 1 $reference | cut -d'>' -f2)
-        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json --reroot $reference_name
+        reference_name=\$(head -n 1 $reference | cut -d">" -f2)
+        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json --reroot \$reference_name
         """
     stub:
         """
         touch lineagePaths.txt
         touch auspice_tree.json
-        echo ${task.process}
-        echo 'parameters: annotated_tree=${annotated_tree}'
+        echo ${task.process} >> ${task.process}.txt >> ${task.process}.txt
+        reference_name=\$(head -n 1 $reference | cut -d">" -f2)
+        echo 'parameters: annotated_tree=${annotated_tree}, reference=${reference}, reference_name=\$reference_name' >> ${task.process}.txt >> ${task.process}.txt
         matUtils --help
         """
 }

@@ -11,6 +11,7 @@ process ALIGN_MINIMAP2 {
         val threads
     output:
         path "aligned.fasta", emit: align_fasta
+        path '*'
 
     script:
         """
@@ -21,8 +22,8 @@ process ALIGN_MINIMAP2 {
     stub:
         """
         touch aligned.fasta
-        echo ${task.process}
-        echo 'parameters: fasta=${fasta}, ref_seq=${ref_seq}'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: fasta=${fasta}, ref_seq=${ref_seq}' >> ${task.process}.txt
         minimap2 --help
         gofasta --help
         samtools --help

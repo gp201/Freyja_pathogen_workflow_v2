@@ -12,7 +12,7 @@ process IQTREE {
         val threads
     output:
         path "ml_tree.treefile", emit: tree_file
-        path "ml_tree.*"
+        path '*'
 
     script:
         """
@@ -22,8 +22,8 @@ process IQTREE {
         """
         touch ml_tree.treefile
         touch ml_tree.log
-        echo ${task.process}
-        echo 'parameters: fasta=$fasta, threads=$threads, iqtree_nucleotide_model=$iqtree_nucleotide_model'
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: fasta=$fasta, threads=$threads, iqtree_nucleotide_model=$iqtree_nucleotide_model' >> ${task.process}.txt
         iqtree2 --help
         """    
 }
