@@ -120,7 +120,6 @@ def main():
     if not check_metadata(fasta_file, metadata_file, column):
         errors.append('Fasta headers not found in metadata file')
     if errors:
-        # print The following errors were found: in red
         print('\033[91mThe following errors were found:\033[0m')
         for error in errors:
             print('\033[91m- {}\033[0m'.format(error))
@@ -129,6 +128,7 @@ def main():
         print('No errors were found')
         sys.exit(0)
 
+# TODO-GP: Check if reference genome is present in the tree
 
 if __name__ == '__main__':
     main()

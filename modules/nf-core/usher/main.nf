@@ -59,12 +59,14 @@ process EXTRACT_CLADES {
 
     input:
         path annotated_tree
+        path reference
     output:
         path 'lineagePaths.txt', emit: lineage_definition_file
         path 'auspice_tree.json'
     script:
         """
-        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json
+        reference_name=$(head -n 1 $reference | cut -d'>' -f2)
+        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json --reroot $reference_name
         """
     stub:
         """
