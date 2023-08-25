@@ -1,1 +1,3 @@
-# Freyja_pathogen_workflow_v2
+# Freyja_pathogen_workflow
+
+This is a workflow for the Freyja Pathogen pipeline.
