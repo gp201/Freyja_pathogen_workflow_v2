@@ -39,6 +39,13 @@ jobs:
       - name: Clean conda cache
         if : ${{ matrix.profile == 'mamba' }}
         run: mamba clean --all --yes
+      - name: Cache mamba envs
+        if : ${{ matrix.profile == 'mamba' }}
+        id: cache-mamba-envs
+        uses: actions/cache@v3
+        with:
+          path: ${{ PWD }}/work/conda/
+          key: ${{ matrix.profile }}
       - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
         run: |
           nextflow -C nextflow.config run main.nf -stub-run -profile ${{ matrix.profile }} --align_method ${{ matrix.align_method }}
