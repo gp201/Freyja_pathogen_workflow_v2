@@ -4,6 +4,6 @@ channels:
   - bioconda
 dependencies:
   - python=3.9
+  - augur=22.4.0
   - pip:
-    - -e git+https://github.com/nextstrain/augur.git@22.4.0#egg=nextstrain-augur
     - biopython==1.81
