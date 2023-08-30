@@ -46,8 +46,8 @@ jobs:
         with:
           path: |
             /home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2/work/conda
-            ${{ join(glob('/home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2/**/src'), '\n  ') }}
-          key: ${{ matrix.profile }}-envs-${{ matrix.align_method }}
+            ${{ join(find('/home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2', 'src', depth: 1), '\n  ') }}
+          key: ${{ matrix.profile }}-envs-${{ matrix.align_method }}-${{ github.sha }}
           restore-keys: ${{ matrix.profile }}-envs-
       - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
         run: |
