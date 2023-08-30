@@ -3,4 +3,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - augur=22.0.3
+  - augur=22.4.0

@@ -4,6 +4,6 @@ channels:
   - bioconda
 dependencies:
   - python=3.10
-  - augur=22.1.0
+  - augur=22.4.0
   - pip:
     - biopython==1.81
