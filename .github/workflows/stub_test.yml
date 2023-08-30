@@ -44,7 +44,7 @@ jobs:
         id: cache-mamba-envs
         uses: actions/cache@v3
         with:
-          path: ${{ PWD }}/work/conda/
+          path: ${PWD}/work/conda/
           key: ${{ matrix.profile }}
       - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
         run: |
