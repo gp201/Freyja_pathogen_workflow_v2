@@ -61,23 +61,20 @@ process EXTRACT_CLADES {
 
     input:
         path annotated_tree
-        path reference
     output:
         path 'lineagePaths.txt', emit: lineage_definition_file
         path '*'
 
     script:
         """
-        reference_name=\$(head -n 1 $reference | cut -d">" -f2)
-        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json --reroot \$reference_name
+        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json
         """
     stub:
         """
         touch lineagePaths.txt
         touch auspice_tree.json
         echo ${task.process} >> ${task.process}.txt >> ${task.process}.txt
-        reference_name=\$(head -n 1 $reference | cut -d">" -f2)
-        echo 'parameters: annotated_tree=${annotated_tree}, reference=${reference}, reference_name=\$reference_name' >> ${task.process}.txt >> ${task.process}.txt
+        echo 'parameters: annotated_tree=${annotated_tree}  >> ${task.process}.txt >> ${task.process}.txt
         matUtils --help
         """
 }

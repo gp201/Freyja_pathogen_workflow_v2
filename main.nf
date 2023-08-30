@@ -54,7 +54,7 @@ workflow {
     }
     GENERATE_PROTOBUF_TREE(FATOVCF.out.vcf, tree, params.threads)
     ANNOTATE_TREE(GENERATE_PROTOBUF_TREE.out.protobuf_tree_file, FORMAT_CLADES_TSV.out.formatted_clades_tsv)
-    EXTRACT_CLADES(ANNOTATE_TREE.out.annotated_tree_file, params.ref_seq)
+    EXTRACT_CLADES(ANNOTATE_TREE.out.annotated_tree_file)
     GENERATE_BARCODES(EXTRACT_CLADES.out.lineage_definition_file)
 }
 
