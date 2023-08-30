@@ -73,8 +73,8 @@ process EXTRACT_CLADES {
         """
         touch lineagePaths.txt
         touch auspice_tree.json
-        echo ${task.process} >> ${task.process}.txt >> ${task.process}.txt
-        echo 'parameters: annotated_tree=${annotated_tree}  >> ${task.process}.txt >> ${task.process}.txt
+        echo ${task.process} >> ${task.process}.txt
+        echo 'parameters: annotated_tree=${annotated_tree}'  >> ${task.process}.txt
         matUtils --help
         """
 }
