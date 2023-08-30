@@ -5,7 +5,7 @@ RUN pip install biopython==1.81
 # install git
 RUN apt-get update && apt-get install -y wget
 
-RUN wget https://github.com/nextstrain/augur/releases/download/22.1.0/nextstrain-augur-22.1.0.tar.gz
+RUN wget https://github.com/nextstrain/augur/releases/download/22.4.0/nextstrain-augur-22.4.0.tar.gz
 
 RUN tar -xzf nextstrain-augur-22.4.0.tar.gz
 
