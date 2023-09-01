@@ -67,7 +67,7 @@ process EXTRACT_CLADES {
 
     script:
         """
-        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json
+        matUtils extract -i $annotated_tree -C lineagePaths.txt -j auspice_tree.json -S samplePaths.txt
         """
     stub:
         """
