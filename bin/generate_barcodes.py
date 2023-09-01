@@ -83,7 +83,7 @@ def test_no_flip_pairs():
     if(len(flipPairs) == 0):
         print('PASS: no flip pairs found')
     else:
-        raise Exception('FAIL: flip pairs found')
+        raise Exception('FAIL: flip pairs found: {}'.format(flipPairs))
 
 
 def identify_chains(df_barcodes):
