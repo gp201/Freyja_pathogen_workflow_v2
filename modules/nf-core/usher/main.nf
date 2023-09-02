@@ -63,6 +63,7 @@ process EXTRACT_CLADES {
         path annotated_tree
     output:
         path 'lineagePaths.txt', emit: lineage_definition_file
+        path 'samplePaths.txt', emit: sample_paths_file
         path '*'
 
     script:
@@ -72,6 +73,7 @@ process EXTRACT_CLADES {
     stub:
         """
         touch lineagePaths.txt
+        touch samplePaths.txt
         touch auspice_tree.json
         echo ${task.process} >> ${task.process}.txt
         echo 'parameters: annotated_tree=${annotated_tree}'  >> ${task.process}.txt

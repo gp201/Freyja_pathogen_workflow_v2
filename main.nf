@@ -7,6 +7,7 @@ include {NEXUS_TO_NEWICK} from './modules/local/nexus_to_newick'
 include {GENERATE_BARCODES} from './modules/local/generate_barcodes'
 include {FORMAT_CLADES_TSV} from './modules/local/clades_tsv_formatter'
 include {NEXTSTRAIN_DATA_EXTRACTION} from './modules/local/nextstrain_data_extraction'
+include {ADD_REF_MUTS   } from './modules/local/add_ref_muts'
 
 include {ALIGN_MAFFT    } from './modules/nf-core/mafft'
 include {ALIGN_MINIMAP2 } from './modules/nf-core/minimap2'
@@ -55,7 +56,8 @@ workflow {
     GENERATE_PROTOBUF_TREE(FATOVCF.out.vcf, tree, params.threads)
     ANNOTATE_TREE(GENERATE_PROTOBUF_TREE.out.protobuf_tree_file, FORMAT_CLADES_TSV.out.formatted_clades_tsv)
     EXTRACT_CLADES(ANNOTATE_TREE.out.annotated_tree_file)
-    GENERATE_BARCODES(EXTRACT_CLADES.out.lineage_definition_file)
+    ADD_REF_MUTS(params.ref_seq, EXTRACT_CLADES.out.sample_paths_file, EXTRACT_CLADES.out.lineage_definition_file, align)
+    GENERATE_BARCODES(ADD_REF_MUTS.out.modified_lineage_paths)
 }
 
 workflow.onComplete {

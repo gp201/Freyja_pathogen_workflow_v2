@@ -24,5 +24,5 @@ else
     rm -rf .nextflow
 
     # Delete the output files
-    rm -r output
+    rm -rf output
 fi
