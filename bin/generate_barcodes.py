@@ -3,6 +3,7 @@
 import pandas as pd
 import argparse
 
+
 def parse_tree_paths(df):
     df = df.set_index('clade')
     # Make sure to check with new tree versions, lineages could get trimmed.
@@ -30,7 +31,7 @@ def convert_to_barcodes(df):
 
     print('separating combined splits')
     df_barcodes = df_barcodes.T
-    # dropped since no '' column this time. 
+    # dropped since no '' column this time.
     # df_barcodes = df_barcodes.drop(columns='')
     df_barcodes = df_barcodes.fillna(0)
     temp = pd.DataFrame()
@@ -80,7 +81,7 @@ def test_no_flip_pairs():
     flipPairs = [(d, d[-1] + d[1:len(d)-1]+d[0])
                  for d in df_barcodes.columns
                  if (d[-1] + d[1:len(d)-1]+d[0]) in df_barcodes.columns]
-    if(len(flipPairs) == 0):
+    if (len(flipPairs) == 0):
         print('PASS: no flip pairs found')
     else:
         raise Exception('FAIL: flip pairs found: {}'.format(flipPairs))
@@ -137,12 +138,14 @@ def check_mutation_chain(df_barcodes):
         seq_muts = identify_chains(df_barcodes)
     return df_barcodes
 
+
 def parser():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('input', metavar='input', type=str,
                         help='input file')
     args = parser.parse_args()
     return args
+
 
 def main():
     args = parser()
@@ -153,6 +156,7 @@ def main():
     df_barcodes = check_mutation_chain(df_barcodes)
     df_barcodes.to_csv('barcode.csv')
     test_no_flip_pairs()
+
 
 if __name__ == '__main__':
     main()

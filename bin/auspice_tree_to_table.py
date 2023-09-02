@@ -10,10 +10,12 @@ import pandas as pd
 
 node_names = {}
 
+
 def handle_duplicate_names(name):
     if name in node_names.keys():
         node_names[name] += 1
-        print(f"Duplicate node name '{name}' found. Renaming to '{name}_{node_names[name]}'")
+        print(
+            f"Duplicate node name '{name}' found. Renaming to '{name}_{node_names[name]}'")
         name = f"{name}_{node_names[name]}"
     else:
         node_names[name] = 0
@@ -121,10 +123,14 @@ def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--tree", required=True, help="auspice tree JSON")
-    parser.add_argument("--output-metadata", help="tab-delimited file of attributes per node of the given tree")
-    parser.add_argument("--output-tree", help="Newick version of the given tree")
-    parser.add_argument("--include-internal-nodes", action="store_true", help="include data from internal nodes in metadata output")
-    parser.add_argument("--attributes", nargs="+", help="names of attributes to export from the given tree in the metadata output")
+    parser.add_argument(
+        "--output-metadata", help="tab-delimited file of attributes per node of the given tree")
+    parser.add_argument(
+        "--output-tree", help="Newick version of the given tree")
+    parser.add_argument("--include-internal-nodes", action="store_true",
+                        help="include data from internal nodes in metadata output")
+    parser.add_argument("--attributes", nargs="+",
+                        help="names of attributes to export from the given tree in the metadata output")
 
     args = parser.parse_args()
 
@@ -174,7 +180,8 @@ if __name__ == "__main__":
                     elif attribute in node.branch_attrs:
                         value = node.branch_attrs[attribute]
                     else:
-                        print(f"Could not find attribute '{attribute}' for node '{node.name}'.")
+                        print(
+                            f"Could not find attribute '{attribute}' for node '{node.name}'.")
                         value = None
 
                     if value is not None:

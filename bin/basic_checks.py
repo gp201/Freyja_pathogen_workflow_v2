@@ -130,5 +130,6 @@ def main():
 
 # TODO-GP: Check if reference genome is present in the tree
 
+
 if __name__ == '__main__':
     main()

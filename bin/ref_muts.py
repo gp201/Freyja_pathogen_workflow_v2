@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import pandas as pd
 from Bio import SeqIO
 import argparse
@@ -153,7 +155,8 @@ def main():
     ref = SeqIO.read(args.reference, "fasta")
     # if reference in the sample mutations file, use that as the root
     if sample_muts_df[sample_muts_df["sample"] == ref.id].shape[0] > 0:
-        additonal_muts = reverse_muts_to_root(get_muts(sample_muts_df[sample_muts_df["sample"] == ref.id].iloc[0]))
+        additonal_muts = reverse_muts_to_root(
+            get_muts(sample_muts_df[sample_muts_df["sample"] == ref.id].iloc[0]))
         # change base key to ref and mut key to root
         for i in additonal_muts.keys():
             additonal_muts[i]["ref"] = additonal_muts[i].pop("base")
@@ -182,15 +185,18 @@ def main():
         # Note: Insertions and deletions are not included in the additional mutations list
         if '-' in additonal_muts[i]['root'] or '-' in additonal_muts[i]['ref']:
             continue
-        additional_muts_list.append(str(additonal_muts[i]['ref'] + str(i) + additonal_muts[i]['root']))
+        additional_muts_list.append(
+            str(additonal_muts[i]['ref'] + str(i) + additonal_muts[i]['root']))
     if additional_muts_list == []:
         print("No additional mutations found.")
         # duplicate lineage paths file
-        lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(lambda x: ' '.join(x))
+        lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(
+            lambda x: ' '.join(x))
     else:
         print("Mutations found.")
         # add the additional mutations to the lineage paths after the first item
-        lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(lambda x: x[0] + ' ' + ','.join(additional_muts_list) + ' ' + ' '.join(x[1:]))
+        lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(
+            lambda x: x[0] + ' ' + ','.join(additional_muts_list) + ' ' + ' '.join(x[1:]))
         # lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(lambda x: ' '.join(x))
     lineage_paths.to_csv(args.lineage_paths + '.rerooted', sep='\t')
 

@@ -25,6 +25,6 @@ process ADD_REF_MUTS {
         touch lineagePaths.txt.rerooted
         echo ${task.process} >> ${task.process}.txt
         echo 'parameters: reference_sequence=${reference_sequence}, sample_mutations=${sample_mutations}, lineage_mutations=${lineage_mutations}, sample_sequences=${sample_sequences}' >> ${task.process}.txt
-        clades_tsv_formatter.py --help
+        ref_muts.py --help
         """    
 }
