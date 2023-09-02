@@ -27,7 +27,7 @@ jobs:
         with:
           mamba-version: "*"
           channels: conda-forge,bioconda
-          channel-priority: true
+          channel-priority: false
           auto-activate-base: true
       - name: Setup nextflow
         uses: nf-core/setup-nextflow@v1.2.0
