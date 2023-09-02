@@ -36,9 +36,6 @@ jobs:
       - name: Setup docker
         if : ${{ matrix.profile == 'docker' }}
         run: make setup-docker
-      - name: Clean conda cache
-        if : ${{ matrix.profile == 'mamba' }}
-        run: mamba clean --all --yes
       - name: Cache mamba envs
         if : ${{ matrix.profile == 'mamba' }}
         id: cache-mamba-envs
