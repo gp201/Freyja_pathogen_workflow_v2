@@ -2,5 +2,5 @@
 work
 output
 tmp/
-.vscode/
-bin/__pycache__/
+.vscode/**/*
+*.pyc
