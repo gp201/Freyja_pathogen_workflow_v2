@@ -46,7 +46,6 @@ jobs:
         with:
           path: |
             /home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2/work/conda
-            /home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2/**/src
           key: ${{ matrix.profile }}-envs-${{ matrix.align_method }}-${{ github.sha }}
           restore-keys: ${{ matrix.profile }}-envs-
       - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
