@@ -27,6 +27,9 @@ process GENERATE_PROTOBUF_TREE {
         """
 }
 
+// check if matUtils_overlap is set else check if skip_clade_assignment is true then return  0 else return 0.6
+matUtils_overlap = params.matUtils_overlap ? params.matUtils_overlap : (params.skip_clade_assignment ? 0 : 0.6)
+
 process ANNOTATE_TREE {
     conda file("${moduleDir}/environment.yml")
     // TODO-GP: check if docker image is available for all processes
@@ -42,13 +45,13 @@ process ANNOTATE_TREE {
 
     script:
         """
-        matUtils annotate -i $protobuf_tree_file -c $clades -o annotated_tree.pb --set-overlap $params.matUtils_overlap
+        matUtils annotate -i $protobuf_tree_file -c $clades -o annotated_tree.pb --set-overlap $matUtils_overlap
         """
     stub:
         """
         touch annotated_tree.pb
         echo ${task.process} >> ${task.process}.txt
-        echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}, overlap=${params.matUtils_overlap}' >> ${task.process}.txt
+        echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}, overlap=${matUtils_overlap}' >> ${task.process}.txt
         matUtils --help
         """
 }

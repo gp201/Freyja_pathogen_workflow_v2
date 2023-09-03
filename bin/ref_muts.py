@@ -177,7 +177,7 @@ def main():
     # convert to dataframe and save as csv
     df = pd.DataFrame.from_dict(additonal_muts, orient="index")
     df.to_csv(args.output, sep="\t", index_label="position")
-    lineage_paths = parse_tree_paths(pd.read_csv(args.lineage_paths, sep='\t'))
+    lineage_paths = parse_tree_paths(pd.read_csv(args.lineage_paths, sep='\t').fillna(''))
     print(lineage_paths.head(1)["from_tree_root"].values[0])
     # append additional mutations to the begining from_tree_root column list
     additional_muts_list = []
