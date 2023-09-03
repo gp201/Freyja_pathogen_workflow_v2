@@ -48,7 +48,7 @@ process ANNOTATE_TREE {
         """
         touch annotated_tree.pb
         echo ${task.process} >> ${task.process}.txt
-        echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}' >> ${task.process}.txt
+        echo 'parameters: protobuf_tree_file=${protobuf_tree_file}, clades=${clades}, overlap=${params.matUtils_overlap}' >> ${task.process}.txt
         matUtils --help
         """
 }
