@@ -14,7 +14,7 @@ process GENERATE_BARCODES {
 
     script:
         """
-        generate_barcodes.py --input $lineage_definition_file --prefix $prefix --output barcode.csv
+        generate_barcodes.py --input $lineage_definition_file --prefix "$prefix" --output barcode.csv
         plot_barcode.py --input barcode.csv
         """
     stub:
