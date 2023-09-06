@@ -57,7 +57,7 @@ workflow {
     ANNOTATE_TREE(GENERATE_PROTOBUF_TREE.out.protobuf_tree_file, FORMAT_CLADES_TSV.out.formatted_clades_tsv)
     EXTRACT_CLADES(ANNOTATE_TREE.out.annotated_tree_file)
     ADD_REF_MUTS(params.ref_seq, EXTRACT_CLADES.out.sample_paths_file, EXTRACT_CLADES.out.lineage_definition_file, align)
-    GENERATE_BARCODES(ADD_REF_MUTS.out.modified_lineage_paths)
+    GENERATE_BARCODES(ADD_REF_MUTS.out.modified_lineage_paths, params.barcode_prefix)
 }
 
 workflow.onComplete {

@@ -141,8 +141,12 @@ def check_mutation_chain(df_barcodes):
 
 def parser():
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('input', metavar='input', type=str,
+    parser.add_argument('-i', '--input', metavar='input', type=str,
                         help='input file')
+    parser.add_argument('-p', '--prefix', default='' ,metavar='prefix', type=str,
+                        help='prefix for lineages')
+    parser.add_argument('-o', '--output', default="barcode.csv", metavar='output', type=str,
+                        help='output file')
     args = parser.parse_args()
     return args
 
@@ -152,9 +156,12 @@ def main():
     df = pd.read_csv(args.input, sep='\t')
     df = parse_tree_paths(df)
     df_barcodes = convert_to_barcodes(df)
+    if args.prefix != '':
+        # append prefix to all values in the index
+        df_barcodes.index = [args.prefix + str(i) for i in df_barcodes.index]
     df_barcodes = reversion_checking(df_barcodes)
     df_barcodes = check_mutation_chain(df_barcodes)
-    df_barcodes.to_csv('barcode.csv')
+    df_barcodes.to_csv(args.output)
     test_no_flip_pairs()
 
 

@@ -5,7 +5,7 @@ import pandas as pd
 import argparse
 
 
-def plot(barcode):
+def plot(barcode, output_filename):
     alt.Chart(barcode).mark_rect(stroke='#dadfd8', strokeWidth=0.25).encode(
         y='Lineage',
         x=alt.X('Mutation', axis=alt.Axis(labels=False, tickSize=0)),
@@ -14,7 +14,7 @@ def plot(barcode):
     ).properties(
         width=500,
         height=250
-    ).save("barcode.html")
+    ).save(output_filename)
 
 
 def parser():
@@ -29,6 +29,14 @@ def parser():
         required=True,
         help="Input CSV file"
     )
+    parser.add_argument(
+        "-o",
+        "--output",
+        default="barcode.html",
+        type=str,
+        required=True,
+        help="Output HTML file"
+    )
     return parser.parse_args()
 
 
@@ -39,7 +47,7 @@ def main():
     # convert barcode dataframe to long format
     barcode = barcode.stack().reset_index()
     barcode.columns = ["Lineage", "Mutation", "z"]
-    plot(barcode)
+    plot(barcode, args.output)
 
 
 if __name__ == '__main__':

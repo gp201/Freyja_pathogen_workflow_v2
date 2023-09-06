@@ -8,13 +8,14 @@ process GENERATE_BARCODES {
 
     input: 
         path lineage_definition_file
+        val prefix
     output:
         path '*'
 
     script:
         """
-        generate_barcodes.py $lineage_definition_file
-        plot_barcode.py -i barcode.csv
+        generate_barcodes.py --input $lineage_definition_file --prefix $prefix --output barcode.csv
+        plot_barcode.py --input barcode.csv
         """
     stub:
         """
