@@ -34,7 +34,7 @@ def parser():
         "--output",
         default="barcode.html",
         type=str,
-        required=True,
+        required=False,
         help="Output HTML file"
     )
     return parser.parse_args()
