@@ -155,6 +155,8 @@ def main():
     ref = SeqIO.read(args.reference, "fasta")
     # if reference in the sample mutations file, use that as the root
     if sample_muts_df[sample_muts_df["sample"] == ref.id].shape[0] > 0:
+        print("Reference {} in present in sample mutations file.".format(
+            ref.id))
         additonal_muts = reverse_muts_to_root(
             get_muts(sample_muts_df[sample_muts_df["sample"] == ref.id].iloc[0]))
         # change base key to ref and mut key to root
@@ -163,6 +165,8 @@ def main():
             additonal_muts[i]["root"] = additonal_muts[i].pop("mut")
     # else generate the root sequence
     else:
+        print("Reference {} not present in sample mutations file.".format(
+            ref.id))
         root_seqs = []
         for _, sample in tqdm(sample_muts_df[sample_muts_df["mutations"].notnull()].iterrows(), total=sample_muts_df[sample_muts_df["mutations"].notnull()].shape[0], desc="Generating root sequences"):
             root_muts = reverse_muts_to_root(get_muts(sample))
