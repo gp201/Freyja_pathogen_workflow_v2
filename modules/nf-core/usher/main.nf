@@ -28,7 +28,7 @@ process GENERATE_PROTOBUF_TREE {
 }
 
 // check if matUtils_overlap is set else check if skip_clade_assignment is true then return  0 else return 0.6
-matUtils_overlap = params.matUtils_overlap ? params.matUtils_overlap : (params.skip_clade_assignment ? 0 : 0.6)
+matUtils_overlap = params.matUtils_overlap != '' ? params.matUtils_overlap : (params.skip_clade_assignment ? 0.0 : 0.6)
 
 process ANNOTATE_TREE {
     conda file("${moduleDir}/environment.yml")
