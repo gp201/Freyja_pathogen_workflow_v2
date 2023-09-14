@@ -155,7 +155,7 @@ def main():
     ref = SeqIO.read(args.reference, "fasta")
     # if reference in the sample mutations file, use that as the root
     if sample_muts_df[sample_muts_df["sample"] == ref.id].shape[0] > 0:
-        print("Reference {} in present in sample mutations file.".format(
+        print("Reference {} is present in sample mutations file.".format(
             ref.id))
         additonal_muts = reverse_muts_to_root(
             get_muts(sample_muts_df[sample_muts_df["sample"] == ref.id].iloc[0]))
@@ -188,6 +188,9 @@ def main():
     for i in additonal_muts.keys():
         # Note: Insertions and deletions are not included in the additional mutations list
         if '-' in additonal_muts[i]['root'] or '-' in additonal_muts[i]['ref']:
+            continue
+        # NOTE: Reversions are not included in the additional mutations list
+        if additonal_muts[i]['ref'] == additonal_muts[i]['root']:
             continue
         additional_muts_list.append(
             str(additonal_muts[i]['ref'] + str(i) + additonal_muts[i]['root']))
