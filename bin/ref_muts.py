@@ -148,6 +148,19 @@ def parse_tree_paths(df):
     return df
 
 
+def clean_mutations(mutations):
+    tmp_mutations = {}
+    for i in mutations.keys():
+        # Note: Insertions and deletions are not included in the additional mutations list
+        if '-' in mutations[i]['root'] or '-' in mutations[i]['ref']:
+            continue
+        # NOTE: Reversions are not included in the additional mutations list
+        if mutations[i]['ref'] == mutations[i]['root']:
+            continue
+        tmp_mutations[i] = mutations[i]
+    return tmp_mutations
+
+
 def main():
     args = parse_args()
     sample_muts_df = read_sample_muts(args.sample_muts)
@@ -178,20 +191,15 @@ def main():
         root = generate_consensus_root(root_seqs)
         additonal_muts = compare_seqs(ref, root)
 
+    additonal_muts = clean_mutations(additonal_muts)
     # convert to dataframe and save as csv
     df = pd.DataFrame.from_dict(additonal_muts, orient="index")
     df.to_csv(args.output, sep="\t", index_label="position")
-    lineage_paths = parse_tree_paths(pd.read_csv(args.lineage_paths, sep='\t').fillna(''))
-    print(lineage_paths.head(1)["from_tree_root"].values[0])
+    lineage_paths = parse_tree_paths(pd.read_csv(
+        args.lineage_paths, sep='\t').fillna(''))
     # append additional mutations to the begining from_tree_root column list
     additional_muts_list = []
     for i in additonal_muts.keys():
-        # Note: Insertions and deletions are not included in the additional mutations list
-        if '-' in additonal_muts[i]['root'] or '-' in additonal_muts[i]['ref']:
-            continue
-        # NOTE: Reversions are not included in the additional mutations list
-        if additonal_muts[i]['ref'] == additonal_muts[i]['root']:
-            continue
         additional_muts_list.append(
             str(additonal_muts[i]['ref'] + str(i) + additonal_muts[i]['root']))
     if additional_muts_list == []:
