@@ -74,6 +74,8 @@ def pick_sample(sample_muts_df):
 def get_muts(sample):
     muts = {}
     # print(sample)
+    if sample["mutations"] == "" or pd.isnull(sample["mutations"]):
+        return muts
     tmp = sample["mutations"].split(" ")
     for i in tmp:
         # if i is empty, skip
@@ -89,6 +91,12 @@ def get_muts(sample):
 def reverse_muts_to_root(muts):
     """Reverse the mutations to the root node."""
     root_muts = {}
+    if muts == {}:
+        root_muts[0] = {
+            "base": "",
+            "mut": "",
+        }
+        return root_muts
     for value in muts.values():
         for i in value:
             nuc_loc = int(i[1:-1])
