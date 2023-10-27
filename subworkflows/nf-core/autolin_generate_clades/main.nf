@@ -1,14 +1,14 @@
 include {AUTOMATED_LINEAGE_JSON} from '../../../modules/nf-core/automated-lineage-json'
-include {NEXSTRAIN_JSON_GENERATION} from '../../../modules/nf-core/nextstrain_json_generation'
+include {BUILD_AUSPICE_TREE} from '../build_auspice_tree'
 
 workflow AUTOMATED_CLADE_ASSIGNMENT {
     take:
         fasta
         tree
-        metadata_file
+        reference
     main:
-        NEXSTRAIN_JSON_GENERATION(fasta, tree, metadata_file)
-        AUTOMATED_LINEAGE_JSON(NEXSTRAIN_JSON_GENERATION.out.nextstrain_json)
+        BUILD_AUSPICE_TREE(fasta, tree, reference)
+        AUTOMATED_LINEAGE_JSON(BUILD_AUSPICE_TREE.out.auspice_json)
     emit:
         clade_assigments = AUTOMATED_LINEAGE_JSON.out.lineage_definition
 }

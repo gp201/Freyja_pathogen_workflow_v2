@@ -49,7 +49,7 @@ workflow {
     if (params.skip_clade_assignment) {
         FORMAT_CLADES_TSV(params.metadata, params.strain_column, params.lineage_column)
     } else {
-        AUTOMATED_CLADE_ASSIGNMENT(align, tree, params.metadata)
+        AUTOMATED_CLADE_ASSIGNMENT(align, tree, params.ref_seq)
         NEXTSTRAIN_DATA_EXTRACTION(AUTOMATED_CLADE_ASSIGNMENT.out.clade_assigments, 2)
         FORMAT_CLADES_TSV(NEXTSTRAIN_DATA_EXTRACTION.out.auspice_metadata, 'name', params.lineage_column)
     }
