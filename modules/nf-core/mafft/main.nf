@@ -11,7 +11,7 @@ process ALIGN_MAFFT {
         path ref_seq
         val threads
     output:
-        path "aligned.fasta", emit: align_fasta
+        path "aligned.fasta", emit: alignment
         path '*'
 
     script:
