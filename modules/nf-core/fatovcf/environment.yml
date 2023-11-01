@@ -1,0 +1,6 @@
+name: fatovcf
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - ucsc-fatovcf=426

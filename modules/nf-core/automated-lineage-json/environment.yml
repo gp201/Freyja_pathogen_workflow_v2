@@ -1,0 +1,7 @@
+name: automated-lineage-json
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11.4
+  - git=2.40.1

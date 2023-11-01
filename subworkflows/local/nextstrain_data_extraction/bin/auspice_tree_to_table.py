@@ -1,0 +1,1 @@
+../../../../bin/auspice_tree_to_table.py

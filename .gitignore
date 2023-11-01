@@ -1,0 +1,6 @@
+.nextflow*
+work
+output
+tmp/
+.vscode/**/*
+*.pyc

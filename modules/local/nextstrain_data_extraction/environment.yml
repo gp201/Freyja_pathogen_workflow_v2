@@ -1,0 +1,9 @@
+name: nextstrain_data_extraction
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.9
+  - augur=22.4.0
+  - pip:
+    - biopython==1.81
