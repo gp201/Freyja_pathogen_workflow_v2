@@ -26,7 +26,10 @@ def clean_node_name(name):
     """
     Replace special characters in node names with underscores.
     """
-    return re.sub(r"[^a-zA-Z0-9_/\\\\]", "_", name)
+    clean_name = re.sub(r"[^a-zA-Z0-9-_/\\\\]", "_", name)
+    if clean_name != name:
+        print(f"Replaced special characters in node name '{name}' with underscores to get '{clean_name}'")
+    return clean_name
 
 def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
     """Returns a Bio.Phylo tree corresponding to the given JSON dictionary exported
@@ -86,12 +89,9 @@ def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
 
     # v1 and v2 JSONs use different keys for strain names.
     if "name" in json_dict:
-        node.name = clean_node_name(json_dict["name"])
-        node.name = handle_duplicate_names(json_dict["name"])
+        node.name = handle_duplicate_names(clean_node_name(json_dict["name"]))
     else:
-        node.name = clean_node_name(json_dict["strain"])
-        node.name = handle_duplicate_names(json_dict["strain"])
-
+        node.name = handle_duplicate_names(clean_node_name(json_dict["strain"]))
     # Assign all non-children attributes.
     for attr, value in json_dict.items():
         if attr != "children" and attr != "name" and attr != "strain":
