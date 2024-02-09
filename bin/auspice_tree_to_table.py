@@ -7,6 +7,7 @@ from augur.utils import annotate_parents_for_tree
 import Bio.Phylo
 import json
 import pandas as pd
+import re
 
 node_names = {}
 
@@ -21,6 +22,11 @@ def handle_duplicate_names(name):
         node_names[name] = 0
     return name
 
+def clean_node_name(name):
+    """
+    Replace special characters in node names with underscores.
+    """
+    return re.sub(r"[^a-zA-Z0-9_/\\\\]", "_", name)
 
 def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
     """Returns a Bio.Phylo tree corresponding to the given JSON dictionary exported
@@ -80,8 +86,10 @@ def json_to_tree(json_dict, root=True, parent_cumulative_branch_length=None):
 
     # v1 and v2 JSONs use different keys for strain names.
     if "name" in json_dict:
+        node.name = clean_node_name(json_dict["name"])
         node.name = handle_duplicate_names(json_dict["name"])
     else:
+        node.name = clean_node_name(json_dict["strain"])
         node.name = handle_duplicate_names(json_dict["strain"])
 
     # Assign all non-children attributes.
