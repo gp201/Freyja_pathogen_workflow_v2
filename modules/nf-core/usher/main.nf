@@ -14,9 +14,11 @@ process GENERATE_PROTOBUF_TREE {
         path 'tree.pb', emit: protobuf_tree_file
         path '*'
 
+    // TODO(#2): Temporary Fix for Duplicate Node Creation in Usher Tree
     script:
         """
-        usher -t $tree -v $vcf -o tree.pb -T $threads
+        sed -re "s/['\\"]//g;" $tree > tree.noQuotes.nwk
+        usher -t tree.noQuotes.nwk -v $vcf -o tree.pb -T $threads
         """
     stub:
         """
