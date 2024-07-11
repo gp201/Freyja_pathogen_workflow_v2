@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup for conda
         if : ${{ matrix.profile == 'mamba'}}
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
           mamba-version: "*"
           channels: conda-forge,bioconda
@@ -39,7 +39,7 @@ jobs:
       - name: Cache mamba envs
         if : ${{ matrix.profile == 'mamba' }}
         id: cache-mamba-envs
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             /home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2/work/conda
