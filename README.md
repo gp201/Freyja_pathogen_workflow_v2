@@ -5,12 +5,12 @@ This is a workflow for the Freyja Pathogen pipeline.
 ## Installation
 
 1. Install the following softwares:
-    - [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html)
+    - [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html) (>=23.04)
     - Package manager: [Mamba](https://mamba.readthedocs.io/en/latest/mamba-installation.html) (Recommended) or [Conda](https://docs.conda.io/en/latest/) can be used.
 
 2. Run
 ```
-nextflow run https://github.com/gp201/Freyja_pathogen_workflow_v2.git -r 'v1' -profile <mamba|conda> -c <config_file>
+nextflow run https://github.com/gp201/Freyja_pathogen_workflow_v2.git -r 'main' -profile <mamba|conda> -c <config_file>
 ```
 
 > **Note** 

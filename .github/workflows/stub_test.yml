@@ -20,7 +20,7 @@ jobs:
         shell: bash -el {0}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v4
       - name: Setup for conda
         if : ${{ matrix.profile == 'mamba'}}
         uses: conda-incubator/setup-miniconda@v2
@@ -30,7 +30,7 @@ jobs:
           channel-priority: false
           auto-activate-base: true
       - name: Setup nextflow
-        uses: nf-core/setup-nextflow@v1.2.0
+        uses: nf-core/setup-nextflow@v2
         with:
           version: 23.04
       - name: Setup docker

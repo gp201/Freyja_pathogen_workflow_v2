@@ -21,10 +21,6 @@ include {EXTRACT_CLADES} from './modules/nf-core/usher'
 include {AUTOMATED_CLADE_ASSIGNMENT} from './subworkflows/nf-core/autolin_generate_clades'
 
 workflow {
-    // if (params.use_json) {
-    //     NEXTSTRAIN_DATA_EXTRACTION(params.json_file, 1)
-    // }
-    // BASIC_CHECKS(params.fasta, params.metadata, params.strain_column)
     if (params.skip_alignment) {
         alignment = params.fasta
     } else if (params.align_method == "mafft") {
