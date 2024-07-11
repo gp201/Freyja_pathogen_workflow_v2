@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""Generates barcodes from UShER ."""
+
+# This script is a modified version of the https://github.com/andersen-lab/Freyja/blob/main/freyja/convert_paths2barcodes.py
+
 import pandas as pd
 import argparse
 
@@ -75,8 +79,8 @@ def reversion_checking(df_barcodes):
     return df_barcodes
 
 
-def test_no_flip_pairs():
-    df_barcodes = pd.read_csv('barcode.csv',
+def test_no_flip_pairs(barcode_file):
+    df_barcodes = pd.read_csv(barcode_file,
                               index_col=0)
     flipPairs = [(d, d[-1] + d[1:len(d)-1]+d[0])
                  for d in df_barcodes.columns
@@ -167,7 +171,7 @@ def main():
     df_barcodes = reversion_checking(df_barcodes)
     df_barcodes = check_mutation_chain(df_barcodes)
     df_barcodes.to_csv(args.output)
-    test_no_flip_pairs()
+    test_no_flip_pairs(args.output)
 
 
 if __name__ == '__main__':

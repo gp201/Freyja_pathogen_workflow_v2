@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+"""Plot barcode from CSV file."""
+
 import altair as alt
 import pandas as pd
 import argparse
