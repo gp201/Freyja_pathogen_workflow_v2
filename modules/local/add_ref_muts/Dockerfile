@@ -1,5 +1,5 @@
 FROM python:3.11.4-bullseye
 
-RUN pip install pandas==2.0.3 tqdm==4.62.3 biopython==1.81
+RUN pip install pandas==2.0.3 tqdm==4.62.3 biopython==1.81 numpy==1.26.4
 
 WORKDIR /data/

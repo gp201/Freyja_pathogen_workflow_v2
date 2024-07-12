@@ -8,3 +8,4 @@ dependencies:
       - pandas==2.0.3
       - tqdm==4.62.3
       - biopython==1.81
+      - numpy==1.26.4

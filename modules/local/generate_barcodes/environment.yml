@@ -7,3 +7,4 @@ dependencies:
   - pip:
       - pandas==1.5.3
       - altair==4.2.0
+      - numpy==1.26.4
