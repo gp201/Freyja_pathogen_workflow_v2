@@ -1,6 +1,6 @@
 FROM python:3.10
 
-RUN pip install biopython==1.81
+RUN pip install biopython==1.81 numpy==1.26.4
 
 # install git
 RUN apt-get update && apt-get install -y wget
