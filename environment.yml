@@ -1,0 +1,6 @@
+name: FreyjaBarcodePipeline
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - nextflow=23.04.1

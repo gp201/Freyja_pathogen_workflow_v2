@@ -1,0 +1,8 @@
+.nextflow*
+work
+output
+tmp/
+.vscode/**/*
+*.pyc
+bin/__pycache__/*
+.vscode/*

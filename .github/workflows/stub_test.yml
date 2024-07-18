@@ -1,0 +1,50 @@
+name: Pipeline stub test
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  stub_test:
+    name: Stub test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        profile: [mamba, docker]
+        align_method: [mafft, minimap2]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup for conda
+        if : ${{ matrix.profile == 'mamba'}}
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          mamba-version: "*"
+          channels: conda-forge,bioconda
+          channel-priority: false
+          auto-activate-base: true
+      - name: Setup nextflow
+        uses: nf-core/setup-nextflow@v2
+        with:
+          version: 23.04
+      - name: Setup docker
+        if : ${{ matrix.profile == 'docker' }}
+        run: make setup-docker
+      - name: Cache mamba envs
+        if : ${{ matrix.profile == 'mamba' }}
+        id: cache-mamba-envs
+        uses: actions/cache@v4
+        with:
+          path: |
+            /home/runner/work/Freyja_pathogen_workflow_v2/Freyja_pathogen_workflow_v2/work/conda
+          key: ${{ matrix.profile }}-envs-${{ matrix.align_method }}-${{ hashFiles('**/environment.yml') }}
+          restore-keys: ${{ matrix.profile }}-envs-
+      - name: Run pipeline ${{ matrix.align_method }} with profile ${{ matrix.profile }}
+        run: |
+          nextflow -C nextflow.config run main.nf -stub-run -profile ${{ matrix.profile }} --align_method ${{ matrix.align_method }}
