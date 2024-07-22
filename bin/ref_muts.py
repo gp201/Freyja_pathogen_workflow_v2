@@ -219,7 +219,7 @@ def main():
         print("Mutations found.")
         # add the additional mutations to the lineage paths after the first item
         lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(
-            lambda x: x[0] + ' ' + ','.join(additional_muts_list) + ' ' + ' '.join(x[1:]))
+            lambda x: x[0] + ' > ' + ','.join(additional_muts_list) + ' ' + ' '.join(x[1:]))
         # lineage_paths['from_tree_root'] = lineage_paths['from_tree_root'].apply(lambda x: ' '.join(x))
     lineage_paths.to_csv(args.lineage_paths + '.rerooted', sep='\t')
 
