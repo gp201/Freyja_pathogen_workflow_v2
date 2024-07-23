@@ -126,7 +126,7 @@ def compare_seqs(ref, root):
     for i, nuc in enumerate(zip(ref.seq, root,)):
         ref_nuc = nuc[0]
         root_nuc = nuc[1]
-        if ref_nuc.upper() != root_nuc.upper():
+        if ref_nuc.upper() != root_nuc.upper() and ref_nuc.upper() != "N" and root_nuc.upper() != "N":
             additonal_muts[i+1] = {
                 "ref": ref_nuc.upper(),
                 "root": root_nuc.upper()
