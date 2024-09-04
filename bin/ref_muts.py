@@ -144,7 +144,7 @@ def generate_consensus_root(root_seqs):
         for seq in root_seqs:
             nucs.append(seq.seq[i])
         # elmimate nucleotides that are not A, T, C, or G or if all nucleotides are the same
-        nucs = [x for x in nucs if x.upper() in ["A", "T", "C", "G"]
+        nucs = [x for x in nucs if x.upper() in ["A", "T", "C", "G", "N"]
                 or len(set(nucs)) == 1]
         consensus_root += max(set(nucs), key=nucs.count)
     return consensus_root
