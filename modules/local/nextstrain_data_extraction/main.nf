@@ -14,11 +14,13 @@ process NEXTSTRAIN_DATA_EXTRACTION {
         path "${prefix}_auspice_tree.nwk", emit: auspice_tree
 
     script:
+        def attributes = params.auspice_attributes ? "--attributes ${params.auspice_attributes}" : ""
         """
         auspice_tree_to_table.py \
             --tree $json_tree \
             --output-metadata ${prefix}_auspice_metadata.tsv \
-            --output-tree ${prefix}_auspice_tree.nwk
+            --output-tree ${prefix}_auspice_tree.nwk \
+            $attributes
         """
     stub:
         """
