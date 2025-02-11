@@ -160,6 +160,20 @@ def parser():
     return args
 
 
+def replace_underscore_with_dash(df):
+    '''
+    Replace underscores with dashes in the index of the dataframe
+    
+    Args:
+    df: pandas dataframe
+
+    Returns:
+    df: pandas dataframe with underscores replaced with dashes
+    '''
+    df.index = [i.replace('_', '-') for i in df.index]
+    return df
+
+
 def main():
     args = parser()
     df = pd.read_csv(args.input, sep='\t')
@@ -170,6 +184,7 @@ def main():
         df_barcodes.index = [args.prefix + str(i) for i in df_barcodes.index]
     df_barcodes = reversion_checking(df_barcodes)
     df_barcodes = check_mutation_chain(df_barcodes)
+    df_barcodes = replace_underscore_with_dash(df_barcodes)
     df_barcodes.to_csv(args.output)
     test_no_flip_pairs(args.output)
 
