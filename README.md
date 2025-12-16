@@ -1,5 +1,7 @@
 # Freyja_pathogen_workflow
 
+We made a tool to generate pathogen barcodes for the Freyja pipeline. [BarcodeForge](https://github.com/andersen-lab/BarcodeForge/)
+
 This is a workflow for the Freyja Pathogen pipeline.
 
 ## Installation
